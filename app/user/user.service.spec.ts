@@ -13,7 +13,7 @@ describe('UserService', () => {
     return [ HTTP_PROVIDERS, provide(XHRBackend, {useClass: MockBackend}), UserService ];
   });
 
-  it('should fetch right data', inject([XHRBackend, UserService], (mockBackend, userService) => {
+  /*it('should fetch right data', inject([XHRBackend, UserService], (mockBackend, userService) => {
 
-  }));
+  }));*/
 });
