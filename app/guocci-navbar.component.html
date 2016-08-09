@@ -1,0 +1,11 @@
+<nav class="navbar navbar-default">
+    <div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">GUOCCI</a>
+        </div>
+    </div>
+    <div *ngIf="user">
+        <p class="navbar-text" href="#">name: {{user.name}}</p>
+        <p class="navbar-text" href="#">email: {{user.email}}</p>
+    </div>
+</nav>
