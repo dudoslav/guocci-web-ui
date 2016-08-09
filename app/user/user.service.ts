@@ -18,7 +18,7 @@ export class UserService {
       return Promise.reject(error.message || error);
     }
 
-    getUser() {
+    getUser(): Promise<User> {
       return this.http.get(this.userUrl)
           .toPromise()
           .then(response => response.json() as User)
