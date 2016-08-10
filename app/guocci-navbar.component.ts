@@ -5,8 +5,7 @@ import { User } from './user/user';
 
 @Component({
     selector: 'guocci-navbar',
-    templateUrl: 'app/guocci-navbar.component.html',
-    providers: [ UserService ]
+    templateUrl: 'app/guocci-navbar.component.html'
 })
 export class GuocciNavbarComponent implements OnInit {
     user: User;
@@ -16,7 +15,7 @@ export class GuocciNavbarComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.userService.getUser().then(user => this.user = user);
+        this.userService.getUser().subscribe(user => this.user = user);
     }
 
 }

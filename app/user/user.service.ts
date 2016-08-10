@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
-import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/map';
 
 import { User } from './user';
 
@@ -13,15 +13,13 @@ export class UserService {
 
     }
 
-    private handleError(error: any) {
+    /*private handleError(error: any) {
       console.error('An error occurred', error);
       return Promise.reject(error.message || error);
-    }
+    }*/
 
-    getUser(): Promise<User> {
+    getUser() {
       return this.http.get(this.userUrl)
-          .toPromise()
-          .then(response => response.json() as User)
-          .catch(this.handleError);
+        .map((res) => { return new User(res.json()); });
     }
 }

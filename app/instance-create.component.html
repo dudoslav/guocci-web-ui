@@ -1,3 +1,34 @@
-<ul *ngIf="sites">
-  <li *ngFor="let site of sites">{{site.name}}</li>
-</ul>
+<div class="row text-center">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+
+    <div *ngIf="sites" class="form-group">
+      <label for="site">Sites</label>
+      <select class="form-control"
+        id="site"
+        required
+        [(ngModel)]="selectedSite"
+        (ngModelChange)="onSiteChange($event)">
+        <option *ngFor="let site of sites" [ngValue]="site">{{site.name}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="instance-name">Instance name</label>
+      <input type="text" class="form-control" id="instance-name">
+    </div>
+
+    <div class="form-group">
+      <label for="public-ssh-key">Public SSH key</label>
+      <textarea rows="4" cols="50" class="form-control" id="public-ssh-key"></textarea>
+    </div>
+
+    <div *ngIf="appliances" class="form-group">
+      <label for="appliance">Appliance</label>
+      <select class="form-control" id="appliance" required>
+        <option *ngFor="let appliance of appliances" [value]="appliance">{{appliance.name}}</option>
+      </select>
+    </div>
+
+  </div>
+</div>
