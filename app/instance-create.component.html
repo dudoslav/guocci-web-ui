@@ -26,7 +26,7 @@
     <div *ngIf="appliances" class="form-group">
       <label for="appliance">Appliance</label>
       <select class="form-control" id="appliance" required>
-        <option *ngFor="let appliance of appliances" [value]="appliance">{{appliance.name}}</option>
+        <option *ngFor="let appliance of appliances" [ngValue]="appliance">{{appliance.name}}</option>
       </select>
     </div>
 

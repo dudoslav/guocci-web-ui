@@ -21,10 +21,11 @@ export class InstanceCreateComponent implements OnInit {
 
   ngOnInit() {
     this.siteService.getSites()
-      .subscribe(sites => {this.sites = sites; this.selectedSite = this.sites[0]});
+      .subscribe(sites => { this.sites = sites; this.selectedSite = this.sites[0]; });
   }
 
   onSiteChange(value: Site) {
+    this.appliances = undefined;
     this.siteService.getAppliancesOnSite(this.selectedSite.id)
       .subscribe(appliances => this.appliances = appliances);
   }

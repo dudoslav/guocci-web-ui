@@ -1,6 +1,6 @@
 import { provideRouter, RouterConfig } from '@angular/router';
 
-import { InstancesComponent } from './instances.component';
+import { InstanceListComponent } from './instance-list.component';
 import { InstanceCreateComponent } from './instance-create.component';
 
 const routes: RouterConfig = [
@@ -11,7 +11,7 @@ const routes: RouterConfig = [
   },
   {
     path: 'instances',
-    component: InstancesComponent
+    component: InstanceListComponent
   },
   {
     path: 'instances/create',

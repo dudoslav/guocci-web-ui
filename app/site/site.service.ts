@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Rx';
 
 import { Site } from './site';
 import { Appliance } from './appliance';
+import { Instance } from './instance';
 
 @Injectable()
 export class SiteService {
@@ -32,6 +34,16 @@ export class SiteService {
   getAppliancesOnSite(siteId: number) {
     return this.http.get(this.siteUrl + '/' + siteId + '/appliances')
       .map(res => res.json() as Appliance[]);
+  }
+
+  getInstancesOnSite(siteId: number) {
+    return this.http.get(this.siteUrl + '/' + siteId + '/instances')
+      .map(res => res.json() as Instance[]);
+  }
+
+  getAllInstances() {
+    return this.getSites()
+      .flatMap((sites) => { return Observable.forkJoin(sites.map(site => this.getInstancesOnSite(site.id))); });
   }
 
 }
