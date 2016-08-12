@@ -20,6 +20,6 @@ export class UserService {
 
     getUser() {
       return this.http.get(this.userUrl)
-        .map((res) => { return new User(res.json()); });
+        .map(res => res.json() as User);
     }
 }

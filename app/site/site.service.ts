@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Rx';
 import { Site } from './site';
 import { Appliance } from './appliance';
 import { Instance } from './instance';
+import { Flavour } from './flavour';
 
 @Injectable()
 export class SiteService {
@@ -28,7 +29,7 @@ export class SiteService {
 
   getSite(id: number) {
     return this.http.get(this.siteUrl + '/' + id)
-      .map(res => new Site(res.json()));
+      .map(res => res.json() as Site);
   }
 
   getAppliancesOnSite(siteId: number) {
@@ -39,6 +40,15 @@ export class SiteService {
   getInstancesOnSite(siteId: number) {
     return this.http.get(this.siteUrl + '/' + siteId + '/instances')
       .map(res => res.json() as Instance[]);
+  }
+
+  getFlavoursOnSite(siteId: number) {
+    return this.http.get(this.siteUrl + '/' + siteId + '/flavours')
+      .map(res => res.json() as Flavour[]);
+  }
+
+  getAppliancesAndFlavoursOnSite(siteId: number) {
+    return Observable.forkJoin([ this.getAppliancesOnSite(siteId), this.getFlavoursOnSite(siteId) ]);
   }
 
   getAllInstances() {
