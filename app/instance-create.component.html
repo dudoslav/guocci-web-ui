@@ -29,5 +29,12 @@
       </select>
     </div>
 
+    <div *ngIf="flavours" class="form-group">
+      <label for="flavours">Flavours</label>
+      <select class="form-control" id="flavours" required>
+        <option *ngFor="let flavour of flavours" [ngValue]="flavour">{{flavour.name}}</option>
+      </select>
+    </div>
+
   </div>
 </div>
