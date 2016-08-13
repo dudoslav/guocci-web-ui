@@ -22,6 +22,7 @@ export class InstanceCreateComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.model = new Instance();
     this.siteService.getSites()
       .subscribe(sites => { this.sites = sites; this.selectedSite = this.sites[0]; });
   }
@@ -30,5 +31,13 @@ export class InstanceCreateComponent implements OnInit {
     this.appliances = undefined;
     this.siteService.getAppliancesAndFlavoursOnSite(this.selectedSite.id)
       .subscribe(res => { this.appliances = res[0]; this.flavours = res[1]; });
+  }
+
+  submit() {
+    this.goBack();
+  }
+
+  goBack() {
+    window.history.back();
   }
 }
