@@ -14,29 +14,29 @@
 
     <div class="form-group">
       <label for="instance-name">Instance name</label>
-      <input type="text" class="form-control" id="instance-name">
+      <input type="text" class="form-control" id="instance-name" [(ngModel)]="selectedName">
     </div>
 
     <div class="form-group">
       <label for="public-ssh-key">Public SSH key</label>
-      <textarea rows="4" cols="50" class="form-control" id="public-ssh-key"></textarea>
+      <textarea rows="4" cols="50" class="form-control" id="public-ssh-key" [(ngModel)]="selectedSHHKey"></textarea>
     </div>
 
     <div *ngIf="appliances" class="form-group">
       <label for="appliance">Appliance</label>
-      <select class="form-control" id="appliance" required>
+      <select class="form-control" id="appliance" [(ngModel)]="selectedAppliance" required>
         <option *ngFor="let appliance of appliances" [ngValue]="appliance">{{appliance.name}}</option>
       </select>
     </div>
 
     <div *ngIf="flavours" class="form-group">
       <label for="flavours">Flavours</label>
-      <select class="form-control" id="flavours" required>
+      <select class="form-control" id="flavours" [(ngModel)]="selectedFlavour" required>
         <option *ngFor="let flavour of flavours" [ngValue]="flavour">{{flavour.name}}</option>
       </select>
     </div>
 
-    <div>
+    <div class="form-group">
       <button class="btn btn-warning" (click)="goBack()">Back</button>
       <button class="btn btn-primary" (click)="submit()">Submit</button>
     </div>

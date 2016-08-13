@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
@@ -40,6 +40,13 @@ export class SiteService {
   getInstancesOnSite(siteId: number) {
     return this.http.get(this.siteUrl + '/' + siteId + '/instances')
       .map(res => res.json() as Instance[]);
+  }
+
+  createInstanceOnSite(siteId: number, instance: Instance) {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    return this.http
+      .post(this.siteUrl + '/' + siteId + '/instances', JSON.stringify(instance), { headers: headers })
+      .map(res => res.json());
   }
 
   getFlavoursOnSite(siteId: number) {
