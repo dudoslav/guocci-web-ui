@@ -49,6 +49,12 @@ export class SiteService {
       .map(res => res.json());
   }
 
+  deleteInstanceOnSite(siteId: number, instanceId: number) {
+    return this.http
+      .delete(this.siteUrl + '/' + siteId + '/instances/' + instanceId)
+      .map(res => res.json());
+  }
+
   getFlavoursOnSite(siteId: number) {
     return this.http.get(this.siteUrl + '/' + siteId + '/flavours')
       .map(res => res.json() as Flavour[]);
@@ -58,9 +64,19 @@ export class SiteService {
     return Observable.forkJoin([ this.getAppliancesOnSite(siteId), this.getFlavoursOnSite(siteId) ]);
   }
 
-  getAllInstances() {
+  /*getAllInstances() {
     return this.getSites()
-      .flatMap((sites) => { return Observable.forkJoin(sites.map(site => this.getInstancesOnSite(site.id))); });
-  }
+      .flatMap((sites) => {
+        let data: [Site[], any] = [null, null];
+        data[0] = sites;
+        data[1] = Observable.forkJoin(
+          sites.map(site => this.getInstancesOnSite(site.id))
+          , Observable.of(sites)
+          );
+        return data;
+        }).map((data) => {
+          console.log(data);
+        });
+  }*/
 
 }

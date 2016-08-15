@@ -1,9 +1,9 @@
-<div class="row text-center">
+<div class="container-fluid row text-center">
   <div class="col-md-4 col-md-offset-4">
     <a href="#/instances/create" class="btn btn-default btn-block" role="button">Create Instance</a>
   </div>
-  <div *ngFor="let siteInstances of instances" class="col-md-4 col-md-offset-4">
-    <instance-detail *ngFor="let instance of siteInstances of instances" [instance]="instance"></instance-detail>
+  <div class="col-md-4 col-md-offset-4">
+    <site-detail *ngFor="let site of sites" [site]="site"></site-detail>
   </div>
 </div>
 

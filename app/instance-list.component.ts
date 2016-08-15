@@ -1,27 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Instance } from './site/instance';
+import { Site } from './site/site';
 import { SiteService } from './site/site.service';
 
-import { InstanceDetail } from './instance-detail.component';
-
-import { RouterLink } from '@angular/router';
+import { SiteDetailComponent } from './site-detail.component';
 
 @Component({
   selector: 'instance-list',
   templateUrl: 'app/instance-list.component.html',
-  directives: [ InstanceDetail, RouterLink ]
+  directives: [ SiteDetailComponent ]
 })
 export class InstanceListComponent implements OnInit {
 
-  instances: Instance[];
+  sites: Site[];
 
   constructor(private siteService: SiteService) {
 
   }
 
   ngOnInit() {
-    this.siteService.getAllInstances().subscribe(res => this.instances = res as Instance[]);
+    this.siteService.getSites().subscribe(res => this.sites = res as Site[]);
+  }
+
+  deleteInstance(instance: Instance) {
+    //this.siteService.deleteInstanceOnSite();
   }
 
 }
