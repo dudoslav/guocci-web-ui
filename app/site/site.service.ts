@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 
 import 'rxjs/add/operator/map';
@@ -11,10 +11,11 @@ import { Flavour } from './flavour';
 
 @Injectable()
 export class SiteService {
-  private siteUrl = 'https://guocci-mock-server.herokuapp.com/v1/sites';
+  private siteUrl: string;
+  //private sites: Site[];
 
-  constructor(private http: Http) {
-
+  constructor(private http: Http, @Inject('webApiBaseUrl') private webApiBaseUrl: string) {
+    this.siteUrl = `${this.webApiBaseUrl}/sites`;
   }
 
   getSites() {
@@ -39,14 +40,12 @@ export class SiteService {
 
   createInstanceOnSite(siteId: number, instance: Instance) {
     let headers = new Headers({ 'Content-Type': 'application/json', 'Accept': 'application/json' });
-    return this.http
-      .post(this.siteUrl + '/' + siteId + '/instances', JSON.stringify(instance), { headers: headers })
+    return this.http.post(this.siteUrl + '/' + siteId + '/instances', JSON.stringify(instance), { headers: headers })
       .map(res => res.json());
   }
 
   deleteInstanceOnSite(siteId: number, instanceId: number) {
-    return this.http
-      .delete(this.siteUrl + '/' + siteId + '/instances/' + instanceId);
+    return this.http.delete(this.siteUrl + '/' + siteId + '/instances/' + instanceId);
   }
 
   getFlavoursOnSite(siteId: number) {
