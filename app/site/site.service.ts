@@ -12,19 +12,18 @@ import { Flavour } from './flavour';
 @Injectable()
 export class SiteService {
   private siteUrl: string;
-  private sites: Site[];
+  private sites: Observable<Site[]>;
 
   constructor(private http: Http, @Inject('webApiBaseUrl') private webApiBaseUrl: string) {
     this.siteUrl = `${this.webApiBaseUrl}/sites`;
   }
 
   getSites() {
-    if (this.sites) {
-      return Observable.of(this.sites);
-    } else {
-      return this.http.get(this.siteUrl)
+    if (!this.sites) {
+      this.sites = this.http.get(this.siteUrl)
         .map(res => res.json() as Site[]);
     }
+    return this.sites;
   }
 
   getSite(id: number) {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, REACTIVE_FORM_DIRECTIVES, Validators } from '@angular/forms';
 
 import { Site } from './site/site';
 import { Appliance } from './site/appliance';
@@ -9,50 +10,66 @@ import { Credential } from './user/credential';
 
 @Component({
   selector: 'instance-create',
-  templateUrl: 'app/instance-create.component.html'
+  templateUrl: 'app/instance-create.component.html',
+  directives: [ REACTIVE_FORM_DIRECTIVES ]
 })
 export class InstanceCreateComponent implements OnInit {
   sites: Site[];
   appliances: Appliance[];
   flavours: Flavour[];
 
-  selectedSite: Site;
-  selectedAppliance: Appliance;
-  selectedFlavour: Flavour;
-  selectedName: string;
-  selectedSSHKey: string;
+  instanceForm: FormGroup;
 
-  constructor(private siteService: SiteService) {
+  constructor(private siteService: SiteService, private formBuilder: FormBuilder) {
 
   }
 
   ngOnInit() {
+    this.instanceForm = this.formBuilder.group({
+      site: ['', Validators.required],
+      name: ['', Validators.required],
+      key: ['', Validators.required],
+      appliance: ['', Validators.required],
+      flavour: ['', Validators.required]
+    });
+
     this.siteService.getSites()
-      .subscribe(sites => { this.sites = sites; this.selectedSite = this.sites[0]; });
+      .subscribe(sites => {
+        this.sites = sites;
+        this.instanceForm.controls['site'].valueChanges.subscribe(id => this.onSiteChange(id));
+      });
   }
 
-  onSiteChange(value: Site) {
+  onSiteChange(value: number) {
     this.appliances = undefined;
     this.flavours = undefined;
-    this.siteService.getAppliancesAndFlavoursOnSite(this.selectedSite.id)
-      .subscribe(res => { this.appliances = res[0];
+    this.siteService.getAppliancesAndFlavoursOnSite(value)
+      .subscribe(res => {
+        this.appliances = res[0];
         this.flavours = res[1];
-        this.selectedAppliance = this.appliances[0];
-        this.selectedFlavour = this.flavours[0]; });
+      });
   }
 
-  submit() {
+  doSubmit() {
     let model: Instance = new Instance();
-    model.name = this.selectedName;
-    model.applianceId = this.selectedAppliance.id;
-    model.flavourId = this.selectedFlavour.id;
+    model.name = this.instanceForm.value.name;
+    model.applianceId = this.instanceForm.value.appliance;
+    model.flavourId = this.instanceForm.value.flavour;
+
     let modelCredentials: Credential[] = [];
     modelCredentials.push(new Credential());
     modelCredentials[0].type = 'sshKey';
-    modelCredentials[0].value = this.selectedSSHKey;
+    modelCredentials[0].value = this.instanceForm.value.key;
     model.credentials = modelCredentials;
-    this.siteService.createInstanceOnSite(this.selectedSite.id, model).subscribe(res => console.log(res));
-    this.goBack();
+
+    this.siteService.createInstanceOnSite(this.instanceForm.value.site, model)
+    .subscribe(res => {
+        console.log(res);
+        this.goBack();
+      },
+      err => {
+        alert('Failed to create instance!');
+      });
   }
 
   goBack() {

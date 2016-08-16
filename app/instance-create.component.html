@@ -1,45 +1,41 @@
 <div class="row text-center">
-  <div class="col-md-4 col-md-offset-4">
+  <form class="col-md-4 col-md-offset-4 form-group" [formGroup]="instanceForm">
 
-    <div *ngIf="sites" class="form-group">
+    <div *ngIf="sites">
       <label for="site">Sites</label>
-      <select class="form-control"
-        id="site"
-        required
-        [(ngModel)]="selectedSite"
-        (ngModelChange)="onSiteChange($event)">
-        <option *ngFor="let site of sites" [ngValue]="site">{{site.name}}</option>
+      <select class="form-control" formControlName="site">
+        <option *ngFor="let site of sites" [ngValue]="site.id">{{site.name}}</option>
       </select>
     </div>
 
-    <div class="form-group">
+    <div>
       <label for="instance-name">Instance name</label>
-      <input type="text" class="form-control" id="instance-name" [(ngModel)]="selectedName">
+      <input type="text" class="form-control" formControlName="name">
     </div>
 
-    <div class="form-group">
+    <div>
       <label for="public-ssh-key">Public SSH key</label>
-      <textarea rows="4" cols="50" class="form-control" id="public-ssh-key" [(ngModel)]="selectedSSHKey"></textarea>
+      <textarea rows="4" cols="50" class="form-control" formControlName="key"></textarea>
     </div>
 
-    <div *ngIf="appliances" class="form-group">
+    <div *ngIf="appliances">
       <label for="appliance">Appliance</label>
-      <select class="form-control" id="appliance" [(ngModel)]="selectedAppliance" required>
-        <option *ngFor="let appliance of appliances" [ngValue]="appliance">{{appliance.name}}</option>
+      <select class="form-control" formControlName="appliance">
+        <option *ngFor="let appliance of appliances" [ngValue]="appliance.id">{{appliance.name}}</option>
       </select>
     </div>
 
-    <div *ngIf="flavours" class="form-group">
+    <div *ngIf="flavours">
       <label for="flavours">Flavours</label>
-      <select class="form-control" id="flavours" [(ngModel)]="selectedFlavour" required>
-        <option *ngFor="let flavour of flavours" [ngValue]="flavour">{{flavour.name}}</option>
+      <select class="form-control" formControlName="flavour">
+        <option *ngFor="let flavour of flavours" [ngValue]="flavour.id">{{flavour.name}}</option>
       </select>
     </div>
 
-    <div class="form-group">
+    <div>
       <button class="btn btn-warning" (click)="goBack()">Back</button>
-      <button class="btn btn-primary" (click)="submit()">Submit</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!instanceForm.valid" (click)="doSubmit()">Submit</button>
     </div>
 
-  </div>
+  </form>
 </div>
