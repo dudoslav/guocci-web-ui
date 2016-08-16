@@ -36,6 +36,10 @@ export class SiteService {
       .map(res => res.json() as Appliance[]);
   }
 
+  getApplianceOnSite(siteId: number, applianceId: number) {
+    return this.http.get(`${this.siteUrl}/${siteId}/appliances/${applianceId}`).map(res => res.json() as Appliance);
+  }
+
   getInstancesOnSite(siteId: number) {
     return this.http.get(this.siteUrl + '/' + siteId + '/instances')
       .map(res => res.json() as Instance[]);
@@ -54,6 +58,10 @@ export class SiteService {
   getFlavoursOnSite(siteId: number) {
     return this.http.get(this.siteUrl + '/' + siteId + '/flavours')
       .map(res => res.json() as Flavour[]);
+  }
+
+  getFlavourOnSite(siteId: number, flavourId: number) {
+    return this.http.get(`${this.siteUrl}/${siteId}/flavours/${flavourId}`).map(res => res.json() as Flavour);
   }
 
   getAppliancesAndFlavoursOnSite(siteId: number) {

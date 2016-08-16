@@ -1,7 +1,18 @@
 <div *ngIf="instance" class="container-fluid well">
-  <h3>{{instance.name}}</h3>
-  <div><label>Appliance id</label> {{instance.applianceId}}</div>
-  <div><label>Flavour id</label> {{instance.flavourId}}</div>
-  <p>{{instance.userData}}</p>
-  <button type="button" class="btn btn-danger" (click)="doDelete()">Delete</button>
+  <div class="row">
+    <div class="col-sm-10">
+      <h3>{{instance.name}}</h3>
+      <div class="row">
+        <div class="col-sm-6" *ngIf="appliance">
+          <p>{{appliance.name}}</p>
+        </div>
+        <div class="col-sm-6" *ngIf="flavour">
+          <p>{{flavour.name}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <button type="button" class="btn btn-block btn-danger" (click)="doDelete()">Delete</button>
+    </div>
+  </div>
 </div>

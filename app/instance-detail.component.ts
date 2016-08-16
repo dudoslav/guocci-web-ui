@@ -1,6 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { Instance } from './site/instance';
+import { Appliance } from './site/appliance';
+import { Flavour } from './site/flavour';
 import { Site } from './site/site';
 
 import { SiteService } from './site/site.service';
@@ -14,14 +16,21 @@ import { SiteService } from './site/site.service';
     }
   `]
 })
-export class InstanceDetailComponent {
+export class InstanceDetailComponent implements OnInit {
   @Input()
   instance: Instance;
   @Input()
   site: Site;
+  appliance: Appliance;
+  flavour: Flavour;
 
   constructor(private siteService: SiteService) {
 
+  }
+
+  ngOnInit() {
+    this.siteService.getApplianceOnSite(this.site.id, this.instance.applianceId).subscribe(res => this.appliance = res);
+    this.siteService.getFlavourOnSite(this.site.id, this.instance.flavourId).subscribe(res => this.flavour = res);
   }
 
   doDelete() {
