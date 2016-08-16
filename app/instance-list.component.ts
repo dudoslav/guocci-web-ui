@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 
-import { Instance } from './site/instance';
 import { Site } from './site/site';
 import { SiteService } from './site/site.service';
 
@@ -9,11 +9,12 @@ import { SiteDetailComponent } from './site-detail.component';
 @Component({
   selector: 'instance-list',
   templateUrl: 'app/instance-list.component.html',
-  directives: [ SiteDetailComponent ]
+  directives: [ SiteDetailComponent, ROUTER_DIRECTIVES ]
 })
 export class InstanceListComponent implements OnInit {
 
   sites: Site[];
+  selectedSite: Site;
 
   constructor(private siteService: SiteService) {
 
@@ -23,8 +24,8 @@ export class InstanceListComponent implements OnInit {
     this.siteService.getSites().subscribe(res => this.sites = res as Site[]);
   }
 
-  deleteInstance(instance: Instance) {
-    //this.siteService.deleteInstanceOnSite();
+  onSelect(site: Site) {
+    this.selectedSite = site;
   }
 
 }

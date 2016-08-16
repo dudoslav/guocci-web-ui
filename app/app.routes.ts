@@ -3,18 +3,18 @@ import { provideRouter, RouterConfig } from '@angular/router';
 import { InstanceListComponent } from './instance-list.component';
 import { InstanceCreateComponent } from './instance-create.component';
 
-const routes: RouterConfig = [
+export const routes: RouterConfig = [
   {
     path: '',
-    redirectTo: '/instances',
+    redirectTo: '/sites',
     pathMatch: 'full'
   },
   {
-    path: 'instances',
+    path: 'sites',
     component: InstanceListComponent
   },
   {
-    path: 'instances/create',
+    path: 'sites/instances/create',
     component: InstanceCreateComponent
   }
 ];

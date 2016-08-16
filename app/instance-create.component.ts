@@ -64,11 +64,10 @@ export class InstanceCreateComponent implements OnInit {
 
     this.siteService.createInstanceOnSite(this.instanceForm.value.site, model)
     .subscribe(res => {
-        console.log(res);
         this.goBack();
       },
       err => {
-        alert('Failed to create instance!');
+        alert('Failed to create instance! ${err}');
       });
   }
 
