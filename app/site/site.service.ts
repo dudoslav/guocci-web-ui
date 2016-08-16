@@ -51,8 +51,7 @@ export class SiteService {
 
   deleteInstanceOnSite(siteId: number, instanceId: number) {
     return this.http
-      .delete(this.siteUrl + '/' + siteId + '/instances/' + instanceId)
-      .map(res => res.json());
+      .delete(this.siteUrl + '/' + siteId + '/instances/' + instanceId);
   }
 
   getFlavoursOnSite(siteId: number) {

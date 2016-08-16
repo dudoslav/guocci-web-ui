@@ -3,6 +3,6 @@
     <h3 class="panel-title">{{site.name}}</h3>
   </div>
   <div class="panel-body">
-    <instance-detail *ngFor="let instance of instances" [instance]="instance"></instance-detail>
+    <instance-detail *ngFor="let instance of instances" [instance]="instance" [site]="site"></instance-detail>
   </div>
 </div>
