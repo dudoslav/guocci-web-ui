@@ -17,11 +17,6 @@ export class SiteService {
 
   }
 
-  /*private handleError(error: any) {
-    console.error('An error occurred', error);
-    return Promise.reject(error.message || error);
-  }*/
-
   getSites() {
     return this.http.get(this.siteUrl)
       .map(res => res.json() as Site[]);
@@ -43,7 +38,7 @@ export class SiteService {
   }
 
   createInstanceOnSite(siteId: number, instance: Instance) {
-    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let headers = new Headers({ 'Content-Type': 'application/json', 'Accept': 'application/json' });
     return this.http
       .post(this.siteUrl + '/' + siteId + '/instances', JSON.stringify(instance), { headers: headers })
       .map(res => res.json());
@@ -62,20 +57,5 @@ export class SiteService {
   getAppliancesAndFlavoursOnSite(siteId: number) {
     return Observable.forkJoin([ this.getAppliancesOnSite(siteId), this.getFlavoursOnSite(siteId) ]);
   }
-
-  /*getAllInstances() {
-    return this.getSites()
-      .flatMap((sites) => {
-        let data: [Site[], any] = [null, null];
-        data[0] = sites;
-        data[1] = Observable.forkJoin(
-          sites.map(site => this.getInstancesOnSite(site.id))
-          , Observable.of(sites)
-          );
-        return data;
-        }).map((data) => {
-          console.log(data);
-        });
-  }*/
 
 }
