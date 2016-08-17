@@ -11,11 +11,11 @@ import { Flavour } from './flavour';
 
 @Injectable()
 export class SiteService {
-  private siteUrl: string;
+  private siteUrl: string = '/sites';
   private sites: Observable<Site[]>;
 
-  constructor(private http: Http, @Inject('webApiBaseUrl') private webApiBaseUrl: string) {
-    this.siteUrl = `${this.webApiBaseUrl}/sites`;
+  constructor(private http: Http) {
+
   }
 
   getSites() {

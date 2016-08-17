@@ -7,10 +7,10 @@ import { User } from './user';
 
 @Injectable()
 export class UserService {
-    private userUrl: string;
+    private userUrl: string = '/user';
 
-    constructor(private http: Http, @Inject('webApiBaseUrl') private webApiBaseUrl: string) {
-      this.userUrl = `${this.webApiBaseUrl}/user`;
+    constructor(private http: Http) {
+
     }
 
     getUser() {
