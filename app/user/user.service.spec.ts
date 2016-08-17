@@ -13,7 +13,7 @@ describe('UserService', () => {
   let service: UserService;
 
   beforeEachProviders(() => [
-    provide('webApiBaseUrl', { useValue: 'https://guocci-mock-server.herokuapp.com/v1' }),
+    provide('webApiBaseUrl', { useValue: 'TODO: delete this' }),
     UserService,
     MockBackend,
     BaseRequestOptions,
@@ -27,6 +27,8 @@ describe('UserService', () => {
     mockBackend = _mockBackend;
     service = _service;
   }));
+
+  afterEach(() => mockBackend.verifyNoPendingRequests());
 
   it('should fetch right mocked user', () => {
     let response = {id: 42, name: 'Chose Rodrigez', email: 'chose.rodrigez@imaginary.cloud.cz'};
