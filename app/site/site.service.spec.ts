@@ -10,6 +10,8 @@ import { Appliance } from './appliance';
 import { Flavour } from './flavour';
 import { Instance } from './instance';
 
+import { Credential } from '../user/credential';
+
 describe('SiteService', () => {
   let mockBackend: MockBackend;
   let service: SiteService;
@@ -173,6 +175,42 @@ describe('SiteService', () => {
             expect(credential.type).toBe(response[index].credentials[jindex].type);
             expect(credential.value).toBe(response[index].credentials[jindex].value);
           });
+        });
+      });
+    });
+
+    it('should post instance', () => {
+      let instance: Instance = new Instance();
+      instance.applianceId = 1;
+      instance.flavourId = 1;
+      instance.userData = 'mc server';
+      instance.name = 'Minecraft Server';
+      let credentials: Credential[] = [];
+      credentials.push(new Credential());
+      credentials[0].id = 1;
+      credentials[0].type = 'sshKey';
+      credentials[0].value = 'ssh-rsa lolulu';
+      instance.credentials = credentials;
+
+      mockBackend.connections.subscribe((conn: MockConnection) => {
+        expect(conn.request.method).toBe(1);
+        expect(conn.request.getBody()).toBe(JSON.stringify(instance));
+        let responseInstance = instance;
+        responseInstance.id = 0;
+        conn.mockRespond(new Response(new ResponseOptions({ body: responseInstance })));
+      });
+
+      service.createInstanceOnSite(1, instance).subscribe(res => {
+        let responseInstance = res as Instance;
+        expect(instance.id).toBe(responseInstance.id);
+        expect(instance.name).toBe(responseInstance.name);
+        expect(instance.applianceId).toBe(responseInstance.applianceId);
+        expect(instance.flavourId).toBe(responseInstance.flavourId);
+        expect(instance.userData).toBe(responseInstance.userData);
+        instance.credentials.forEach((credential, index) => {
+          expect(credential.id).toBe(responseInstance.credentials[index].id);
+          expect(credential.type).toBe(responseInstance.credentials[index].type);
+          expect(credential.value).toBe(responseInstance.credentials[index].value);
         });
       });
     });
