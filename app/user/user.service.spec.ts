@@ -40,4 +40,17 @@ describe('UserService', () => {
       expect(user.email).toBe('chose.rodrigez@imaginary.cloud.cz');
     });
   });
+
+  it('should receive wrong data', () => {
+    let response = {id: 42, name: 'Chose Rodrigez'};
+    mockBackend.connections.subscribe((connection: MockConnection) => {
+      connection.mockRespond(new Response(new ResponseOptions({ body: JSON.stringify(response)})));
+    });
+    service.getUser().subscribe(res => {
+      let user: User = res;
+      expect(user.id).toBe(42);
+      expect(user.name).toBe('Chose Rodrigez');
+      expect(user.email).toBe(undefined);
+    });
+  });
 });
