@@ -5,7 +5,7 @@
         <ul class="list-group">
           <li *ngFor="let site of sites" class="list-group-item btn" (click)="onSelect(site)" [class.active]="site === selectedSite">{{site.name}}</li>
         </ul>
-        <a class="btn btn-block btn-primary" routerLink="/sites/instances/create">Create new Instance</a>
+        <a class="btn btn-block btn-primary" routerLink="/sites/instances/create">{{ 'INSTANCE-CREATE' | translate }}</a>
       </div>
       <div class="col-md-6" *ngIf="selectedSite">
         <site-detail [site]="selectedSite"></site-detail>

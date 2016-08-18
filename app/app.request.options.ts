@@ -8,7 +8,9 @@ export class AppRequestOptions extends RequestOptions {
 
   merge(options?: RequestOptionsArgs): RequestOptions {
     let result = new AppRequestOptions(super.merge(options));
-    result.url = this.webApiBaseUrl + result.url;
+    if (options.url.indexOf('i18n') === -1) {
+      result.url = this.webApiBaseUrl + result.url;
+    }
     if (result.method === RequestMethod.Put ||
          result.method === RequestMethod.Post ||
          result.method === RequestMethod.Patch) {

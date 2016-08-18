@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule, RequestOptions } from '@angular/http';
+import { HttpModule, RequestOptions, Http } from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
+
 
 import { routing } from './app.routing';
 import { AppComponent } from './app.component';
@@ -17,7 +19,15 @@ import { AppRequestOptions } from './app.request.options';
 
 
 @NgModule({
-  imports: [ BrowserModule, HttpModule, ReactiveFormsModule, routing ],
+  imports: [ BrowserModule,
+    HttpModule,
+    ReactiveFormsModule,
+    TranslateModule.forRoot({
+          provide: TranslateLoader,
+          useFactory: (http: Http) => new TranslateStaticLoader(http, '/app/i18n', '.json'),
+          deps: [Http]
+        }),
+    routing ],
   declarations: [ AppComponent,
     InstanceDetailComponent,
     InstanceListComponent,

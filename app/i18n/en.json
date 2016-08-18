@@ -1,0 +1,11 @@
+{
+  "INSTANCE-CREATE" : "Create new Instance",
+  "INSTANCE-DELETE" : "Delete Instance",
+  "INSTANCE-NAME" : "Instance name",
+  "PUBLIC-SSH-KEY" : "Public SSH Key",
+  "APPLIANCE" : "Appliance",
+  "FLAVOUR" : "Flavour",
+  "SITE" : "Site",
+  "BACK" : "Back",
+  "SUBMIT" : "Submit"
+}
