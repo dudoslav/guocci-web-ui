@@ -43,6 +43,7 @@ describe('SiteService', () => {
         { id: 3, name: 'site3', country: 'england', endpoint: 'cloud.en' }
       ];
       mockBackend.connections.subscribe((conn: MockConnection) => {
+        expect(conn.request.url).toBe('/sites');
         conn.mockRespond(new Response(new ResponseOptions({ body: response })));
       });
       service.getSites().subscribe(res => {
@@ -60,6 +61,7 @@ describe('SiteService', () => {
     it('should fetch site', () => {
       let response = { id: 1, name: 'site1', country: 'russia', endpoint: 'cloud.ru' };
       mockBackend.connections.subscribe((conn: MockConnection) => {
+        expect(conn.request.url).toBe('/sites/1');
         conn.mockRespond(new Response(new ResponseOptions({ body: response })));
       });
       service.getSite(1).subscribe(res => {
@@ -81,6 +83,7 @@ describe('SiteService', () => {
         { id: 1, name: 'doors 11', mpuri: 'makrohard.ru', vo: 'makrohard' }
       ];
       mockBackend.connections.subscribe((conn: MockConnection) => {
+        expect(conn.request.url).toBe('/sites/1/appliances');
         conn.mockRespond(new Response(new ResponseOptions({ body: response })));
       });
       service.getAppliancesOnSite(1).subscribe(res => {
@@ -98,6 +101,7 @@ describe('SiteService', () => {
     it('should fetch appliance', () => {
       let response = { id: 1, name: 'doors 11', mpuri: 'makrohard.ru', vo: 'makrohard' };
       mockBackend.connections.subscribe((conn: MockConnection) => {
+        expect(conn.request.url).toBe('/sites/1/appliances/1');
         conn.mockRespond(new Response(new ResponseOptions({ body: response })));
       });
       service.getApplianceOnSite(1, 1).subscribe(res => {
@@ -119,6 +123,7 @@ describe('SiteService', () => {
         {id: 2, name: 'amd', memory: 2048000, vcpu: 16, cpu: 16}
       ];
       mockBackend.connections.subscribe((conn: MockConnection) => {
+        expect(conn.request.url).toBe('/sites/1/flavours');
         conn.mockRespond(new Response(new ResponseOptions({ body: response })));
       });
       service.getFlavoursOnSite(1).subscribe(res => {
@@ -137,6 +142,7 @@ describe('SiteService', () => {
     it('should fetch flavour', () => {
       let response = {id: 1, name: 'intel', memory: 1024000, vcpu: 8, cpu: 4};
       mockBackend.connections.subscribe((conn: MockConnection) => {
+        expect(conn.request.url).toBe('/sites/1/flavours/1');
         conn.mockRespond(new Response(new ResponseOptions({ body: response })));
       });
       service.getFlavourOnSite(1, 1).subscribe(res => {
@@ -159,6 +165,7 @@ describe('SiteService', () => {
         { id: 1, name: 'yourInstance', credentials: [ { id: 1, type: 'sshKey', value: 'ssh-rsa jasdfbjhasdf' } ], applianceId: 1, flavourId: 1, userData: '' }
       ];
       mockBackend.connections.subscribe((conn: MockConnection) => {
+        expect(conn.request.url).toBe('/sites/1/instances');
         conn.mockRespond(new Response(new ResponseOptions({ body: response })));
       });
       service.getInstancesOnSite(1).subscribe(res => {
@@ -193,6 +200,7 @@ describe('SiteService', () => {
       instance.credentials = credentials;
 
       mockBackend.connections.subscribe((conn: MockConnection) => {
+        expect(conn.request.url).toBe('/sites/1/instances');
         expect(conn.request.method).toBe(1);
         expect(conn.request.getBody()).toBe(JSON.stringify(instance));
         let responseInstance = instance;
