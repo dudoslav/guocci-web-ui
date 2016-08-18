@@ -67,7 +67,7 @@ export class InstanceCreateComponent implements OnInit {
         this.goBack();
       },
       err => {
-        alert('Failed to create instance! ${err}');
+        alert(`Failed to create instance! ${err}`);
       });
   }
 

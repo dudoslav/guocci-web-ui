@@ -1,4 +1,4 @@
-import { bootstrap }    from '@angular/platform-browser-dynamic';
+import { bootstrap } from '@angular/platform-browser-dynamic';
 import { HTTP_PROVIDERS, RequestOptions } from '@angular/http';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { disableDeprecatedForms, provideForms } from '@angular/forms';

@@ -1,23 +1,23 @@
-import { Injectable, Inject } from '@angular/core';
-import { RequestOptions, RequestOptionsArgs, BaseRequestOptions } from '@angular/http';
+import { Injectable } from '@angular/core';
+import { RequestOptions, RequestOptionsArgs, RequestMethod, Headers } from '@angular/http';
 
 @Injectable()
-export class AppRequestOptions extends BaseRequestOptions {
+export class AppRequestOptions extends RequestOptions {
 
   private webApiBaseUrl: string = 'https://guocci-mock-server.herokuapp.com/v1';
 
   merge(options?: RequestOptionsArgs): RequestOptions {
-    options.url = this.webApiBaseUrl + options.url;
-    if (options.method === 'put' ||
-         options.method === 'post' ||
-         options.method === 'patch') {
-      let headers = options.headers;
-      headers['Content-Type'] = 'application/json';
-      headers['Accept'] = 'application/json';
-      options.headers = headers;
+    let result = new AppRequestOptions(super.merge(options));
+    result.url = this.webApiBaseUrl + result.url;
+    if (result.method === RequestMethod.Put ||
+         result.method === RequestMethod.Post ||
+         result.method === RequestMethod.Patch) {
+      if (!result.headers) {
+        result.headers = new Headers();
+      }
+      result.headers.append('Content-Type', 'application/json');
+      result.headers.append('Accept', 'application/json');
     }
-    let result = super.merge(options);
-    result.merge = this.merge;
     return result;
   }
 

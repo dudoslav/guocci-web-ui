@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 
 import 'rxjs/add/operator/map';
@@ -46,8 +46,8 @@ export class SiteService {
   }
 
   createInstanceOnSite(siteId: number, instance: Instance) {
-    let headers = new Headers({ 'Content-Type': 'application/json', 'Accept': 'application/json' });
-    return this.http.post(this.siteUrl + '/' + siteId + '/instances', JSON.stringify(instance), { headers: headers })
+    //let headers = new Headers({ 'Content-Type': 'application/json', 'Accept': 'application/json' });
+    return this.http.post(this.siteUrl + '/' + siteId + '/instances', JSON.stringify(instance))
       .map(res => res.json());
   }
 
