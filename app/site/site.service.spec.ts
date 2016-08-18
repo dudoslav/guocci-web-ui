@@ -1,6 +1,7 @@
-import { describe, expect, beforeEach, it, inject, beforeEachProviders } from '@angular/core/testing';
-import { provide } from '@angular/core';
-import { BaseRequestOptions, Http, Response, ResponseOptions } from '@angular/http';
+/// <reference path="../../typings/globals/jasmine/index.d.ts" />
+import { inject, TestBed } from '@angular/core/testing';
+import { provide, Injector } from '@angular/core';
+import { BaseRequestOptions, Http, Response, ResponseOptions, HttpModule } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 
 import { SiteService } from './site.service';
@@ -12,20 +13,26 @@ import { Instance } from './instance';
 
 import { Credential } from '../user/credential';
 
+beforeEach(() => {
+  TestBed.configureTestingModule({
+    providers: [
+      SiteService,
+      MockBackend,
+      BaseRequestOptions,
+      provide(Http, {
+        useFactory: (backend: MockBackend, options: BaseRequestOptions) => new Http(backend, options),
+        deps: [ MockBackend, BaseRequestOptions ]
+      })
+    ],
+    imports: [
+      HttpModule
+    ]
+  });
+});
+
 describe('SiteService', () => {
   let mockBackend: MockBackend;
   let service: SiteService;
-
-  beforeEachProviders(() => [
-    provide('webApiBaseUrl', { useValue: 'TODO: delete this' }),
-    SiteService,
-    MockBackend,
-    BaseRequestOptions,
-    provide(Http, {
-      useFactory: (backend: MockBackend, options: BaseRequestOptions) => new Http(backend, options),
-      deps: [ MockBackend, BaseRequestOptions ]
-    })
-  ]);
 
   beforeEach(inject([ MockBackend, SiteService ], (_mockBackend: MockBackend, _service: SiteService) => {
     mockBackend = _mockBackend;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, REACTIVE_FORM_DIRECTIVES, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Site } from './site/site';
 import { Appliance } from './site/appliance';
@@ -11,7 +11,6 @@ import { Credential } from './user/credential';
 @Component({
   selector: 'instance-create',
   templateUrl: 'app/instance-create.component.html',
-  directives: [ REACTIVE_FORM_DIRECTIVES ]
 })
 export class InstanceCreateComponent implements OnInit {
   sites: Site[];

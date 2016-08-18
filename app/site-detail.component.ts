@@ -4,12 +4,10 @@ import { Site } from './site/site';
 import { Instance } from './site/instance';
 import { SiteService } from './site/site.service';
 
-import { InstanceDetailComponent } from './instance-detail.component';
 
 @Component({
   selector: 'site-detail',
   templateUrl: 'app/site-detail.component.html',
-  directives: [ InstanceDetailComponent ]
 })
 export class SiteDetailComponent implements OnInit {
   @Input()

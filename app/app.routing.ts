@@ -1,9 +1,9 @@
-import { provideRouter, RouterConfig } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { InstanceListComponent } from './instance-list.component';
 import { InstanceCreateComponent } from './instance-create.component';
 
-export const routes: RouterConfig = [
+export const routes: Routes = [
   {
     path: '',
     redirectTo: '/sites',
@@ -19,6 +19,4 @@ export const routes: RouterConfig = [
   }
 ];
 
-export const appRouterProviders = [
-  provideRouter(routes)
-];
+export const routing = RouterModule.forRoot(routes);

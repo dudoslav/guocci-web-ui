@@ -1,27 +1,35 @@
-import { describe, expect, beforeEach, it, inject, beforeEachProviders } from '@angular/core/testing';
+/// <reference path="../../typings/globals/jasmine/index.d.ts" />
+import { inject, TestBed } from '@angular/core/testing';
 import { provide } from '@angular/core';
-import { BaseRequestOptions, Http, Response, ResponseOptions } from '@angular/http';
+import { BaseRequestOptions, Http, Response, ResponseOptions, HttpModule } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 
 import { User } from './user';
 
 import { UserService } from './user.service';
 
+
+beforeEach(() => {
+  TestBed.configureTestingModule({
+    providers: [
+      UserService,
+      MockBackend,
+      BaseRequestOptions,
+      provide(Http, {
+        useFactory: (backend: MockBackend, options: BaseRequestOptions) => new Http(backend, options),
+        deps: [ MockBackend, BaseRequestOptions ]
+      })
+    ],
+    imports: [
+      HttpModule
+    ]
+  });
+});
+
 describe('UserService', () => {
 
   let mockBackend: MockBackend;
   let service: UserService;
-
-  beforeEachProviders(() => [
-    provide('webApiBaseUrl', { useValue: 'TODO: delete this' }),
-    UserService,
-    MockBackend,
-    BaseRequestOptions,
-    provide(Http, {
-      useFactory: (backend: MockBackend, options: BaseRequestOptions) => new Http(backend, options),
-      deps: [ MockBackend, BaseRequestOptions ]
-    })
-  ]);
 
   beforeEach(inject([ MockBackend, UserService ], (_mockBackend: MockBackend, _service: UserService) => {
     mockBackend = _mockBackend;

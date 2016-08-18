@@ -7,14 +7,10 @@ import { Site } from './site/site';
 
 import { SiteService } from './site/site.service';
 
+
 @Component({
   selector: 'instance-detail',
-  templateUrl: 'app/instance-detail.component.html',
-  styles: [`
-    .instance-detail-container {
-      background-color: #FFFFFF;
-    }
-  `]
+  templateUrl: 'app/instance-detail.component.html'
 })
 export class InstanceDetailComponent implements OnInit {
   @Input()
