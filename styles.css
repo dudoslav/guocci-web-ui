@@ -1,0 +1,14 @@
+body {
+  background-image: url('/app/assets/img/background.jpg');
+  background-size: cover;
+}
+
+.row {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container-fluid {
+  padding-left: auto;
+  padding-right: auto;
+}
