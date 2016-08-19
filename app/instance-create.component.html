@@ -1,10 +1,24 @@
 <div class="row text-center">
   <form class="col-md-4 col-md-offset-4 form-group" [formGroup]="instanceForm">
 
+    <div *ngIf="appliances">
+      <label for="appliance">{{ 'APPLIANCE' | translate }}</label>
+      <select class="form-control" formControlName="appliance">
+        <option *ngFor="let appliance of appliances" [ngValue]="appliance.id">{{appliance.name}}</option>
+      </select>
+    </div>
+
     <div *ngIf="sites">
       <label for="site">{{ 'SITE' | translate }}</label>
       <select class="form-control" formControlName="site">
         <option *ngFor="let site of sites" [ngValue]="site.id">{{site.name}}</option>
+      </select>
+    </div>
+
+    <div *ngIf="flavours">
+      <label for="flavours">{{ 'FLAVOUR' | translate }}</label>
+      <select class="form-control" formControlName="flavour">
+        <option *ngFor="let flavour of flavours" [ngValue]="flavour.id">{{flavour.name}}</option>
       </select>
     </div>
 
@@ -16,20 +30,6 @@
     <div>
       <label for="public-ssh-key">{{ 'PUBLIC-SSH-KEY' | translate }}</label>
       <textarea rows="4" cols="50" class="form-control" formControlName="key"></textarea>
-    </div>
-
-    <div *ngIf="appliances">
-      <label for="appliance">{{ 'APPLIANCE' | translate }}</label>
-      <select class="form-control" formControlName="appliance">
-        <option *ngFor="let appliance of appliances" [ngValue]="appliance.id">{{appliance.name}}</option>
-      </select>
-    </div>
-
-    <div *ngIf="flavours">
-      <label for="flavours">{{ 'FLAVOUR' | translate }}</label>
-      <select class="form-control" formControlName="flavour">
-        <option *ngFor="let flavour of flavours" [ngValue]="flavour.id">{{flavour.name}}</option>
-      </select>
     </div>
 
     <div>

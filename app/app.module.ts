@@ -8,9 +8,8 @@ import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-tra
 
 import { routing } from './app.routing';
 import { AppComponent } from './app.component';
-import { UserService } from './user/user.service';
-import { SiteService } from './site/site.service';
-import { GuocciNavbarComponent } from './guocci-navbar.component';
+import { GuocciService } from './shared/guocci.service';
+import { NavbarComponent } from './navbar.component';
 import { InstanceDetailComponent } from './instance-detail.component';
 import { InstanceListComponent } from './instance-list.component';
 import { InstanceCreateComponent } from './instance-create.component';
@@ -33,9 +32,8 @@ import { AppRequestOptions } from './app.request.options';
     InstanceListComponent,
     InstanceCreateComponent,
     SiteDetailComponent,
-    GuocciNavbarComponent ],
-  providers: [ UserService,
-    SiteService,
+    NavbarComponent ],
+  providers: [ GuocciService,
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: RequestOptions, useClass: AppRequestOptions } ],
   bootstrap: [ AppComponent ]

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { Site } from './site/site';
-import { Appliance } from './site/appliance';
-import { Flavour } from './site/flavour';
-import { Instance } from './site/instance';
-import { SiteService } from './site/site.service';
-import { Credential } from './user/credential';
+import { Site } from './shared/site';
+import { Appliance } from './shared/appliance';
+import { Flavour } from './shared/flavour';
+import { Instance } from './shared/instance';
+import { Credential } from './shared/credential';
+import { GuocciService } from './shared/guocci.service';
 
 @Component({
   selector: 'instance-create',
@@ -19,34 +19,37 @@ export class InstanceCreateComponent implements OnInit {
 
   instanceForm: FormGroup;
 
-  constructor(private siteService: SiteService, private formBuilder: FormBuilder) {
+  constructor(private guocciService: GuocciService, private formBuilder: FormBuilder) {
 
   }
 
   ngOnInit() {
     this.instanceForm = this.formBuilder.group({
-      site: ['', Validators.required],
-      name: ['', Validators.required],
-      key: ['', Validators.required],
       appliance: ['', Validators.required],
-      flavour: ['', Validators.required]
+      site: ['', Validators.required],
+      flavour: ['', Validators.required],
+      name: ['', Validators.required],
+      key: ['', Validators.required]
     });
 
-    this.siteService.getSites()
-      .subscribe(sites => {
-        this.sites = sites;
+    this.guocciService.getAppliances()
+      .subscribe(res => {
+        this.appliances = res;
+        this.instanceForm.controls['appliance'].valueChanges.subscribe(id => this.onApplianceChange(id));
         this.instanceForm.controls['site'].valueChanges.subscribe(id => this.onSiteChange(id));
       });
   }
 
+  onApplianceChange(value: number) {
+    this.sites = undefined;
+    this.guocciService.getSitesForAppliance(value)
+      .subscribe(res => this.sites = res);
+  }
+
   onSiteChange(value: number) {
-    this.appliances = undefined;
     this.flavours = undefined;
-    this.siteService.getAppliancesAndFlavoursOnSite(value)
-      .subscribe(res => {
-        this.appliances = res[0];
-        this.flavours = res[1];
-      });
+    this.guocciService.getFlavoursOnSiteForAppliance(this.instanceForm.controls['appliance'].value, value)
+      .subscribe(res => this.flavours = res);
   }
 
   doSubmit() {
@@ -61,7 +64,7 @@ export class InstanceCreateComponent implements OnInit {
     modelCredentials[0].value = this.instanceForm.value.key;
     model.credentials = modelCredentials;
 
-    this.siteService.createInstanceOnSite(this.instanceForm.value.site, model)
+    this.guocciService.createInstanceOnSite(this.instanceForm.value.site, model)
     .subscribe(res => {
         this.goBack();
       },

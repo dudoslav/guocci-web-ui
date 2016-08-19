@@ -1,22 +1,21 @@
 /// <reference path="../../typings/globals/jasmine/index.d.ts" />
 import { inject, TestBed } from '@angular/core/testing';
-import { provide, Injector } from '@angular/core';
+import { provide } from '@angular/core';
 import { BaseRequestOptions, Http, Response, ResponseOptions, HttpModule } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 
-import { SiteService } from './site.service';
-
+import { GuocciService } from './guocci.service';
 import { Site } from './site';
 import { Appliance } from './appliance';
 import { Flavour } from './flavour';
 import { Instance } from './instance';
-
-import { Credential } from '../user/credential';
+import { User } from './user';
+import { Credential } from './credential';
 
 beforeEach(() => {
   TestBed.configureTestingModule({
     providers: [
-      SiteService,
+      GuocciService,
       MockBackend,
       BaseRequestOptions,
       provide(Http, {
@@ -30,20 +29,52 @@ beforeEach(() => {
   });
 });
 
-describe('SiteService', () => {
+describe('GuocciService', () => {
   let mockBackend: MockBackend;
-  let service: SiteService;
+  let service: GuocciService;
 
-  beforeEach(inject([ MockBackend, SiteService ], (_mockBackend: MockBackend, _service: SiteService) => {
+  beforeEach(inject([ MockBackend, GuocciService ], (_mockBackend: MockBackend, _service: GuocciService) => {
     mockBackend = _mockBackend;
     service = _service;
   }));
 
   afterEach(() => mockBackend.verifyNoPendingRequests());
 
+  describe('User', () => {
+
+    it('should fetch right mocked user', () => {
+      let response = {id: 42, name: 'Chose Rodrigez', email: 'chose.rodrigez@imaginary.cloud.cz'};
+      mockBackend.connections.subscribe((connection: MockConnection) => {
+        expect(connection.request.url).toBe('/user');
+        connection.mockRespond(new Response(new ResponseOptions({ body: JSON.stringify(response)})));
+      });
+      service.getUser().subscribe(res => {
+        let user: User = res;
+        expect(user.id).toBe(42);
+        expect(user.name).toBe('Chose Rodrigez');
+        expect(user.email).toBe('chose.rodrigez@imaginary.cloud.cz');
+      });
+    });
+
+    it('should receive wrong data', () => {
+      let response = {id: 42, name: 'Chose Rodrigez'};
+      mockBackend.connections.subscribe((connection: MockConnection) => {
+        expect(connection.request.url).toBe('/user');
+        connection.mockRespond(new Response(new ResponseOptions({ body: JSON.stringify(response)})));
+      });
+      service.getUser().subscribe(res => {
+        let user: User = res;
+        expect(user.id).toBe(42);
+        expect(user.name).toBe('Chose Rodrigez');
+        expect(user.email).toBe(undefined);
+      });
+    });
+
+  });
+
   describe('Site', () => {
 
-    it('should fetch sites', () => {
+    it('should fetch all sites', () => {
       let response = [
         { id: 1, name: 'site1', country: 'russia', endpoint: 'cloud.ru' },
         { id: 2, name: 'site2', country: 'usa', endpoint: 'cloud.us' },
@@ -65,13 +96,35 @@ describe('SiteService', () => {
       });
     });
 
-    it('should fetch site', () => {
-      let response = { id: 1, name: 'site1', country: 'russia', endpoint: 'cloud.ru' };
+    it('should fetch sites for appliance', () => {
+      let response = [
+        { id: 1, name: 'site1', country: 'russia', endpoint: 'cloud.ru' },
+        { id: 2, name: 'site2', country: 'usa', endpoint: 'cloud.us' },
+        { id: 3, name: 'site3', country: 'england', endpoint: 'cloud.en' }
+      ];
       mockBackend.connections.subscribe((conn: MockConnection) => {
-        expect(conn.request.url).toBe('/sites/1');
+        expect(conn.request.url).toBe('/appliances/1/sites');
         conn.mockRespond(new Response(new ResponseOptions({ body: response })));
       });
-      service.getSite(1).subscribe(res => {
+      service.getSitesForAppliance(1).subscribe(res => {
+        let sites: Site[] = res;
+        expect(sites.length).toBe(3);
+        sites.forEach((site, index) => {
+          expect(site.id).toBe(response[index].id);
+          expect(site.name).toBe(response[index].name);
+          expect(site.country).toBe(response[index].country);
+          expect(site.endpoint).toBe(response[index].endpoint);
+        });
+      });
+    });
+
+    it('should fetch site for appliance', () => {
+      let response = { id: 1, name: 'site1', country: 'russia', endpoint: 'cloud.ru' };
+      mockBackend.connections.subscribe((conn: MockConnection) => {
+        expect(conn.request.url).toBe('/appliances/2/sites/1');
+        conn.mockRespond(new Response(new ResponseOptions({ body: response })));
+      });
+      service.getSiteForAppliance(2, 1).subscribe(res => {
         let site: Site = res;
         expect(site.id).toBe(1);
         expect(site.name).toBe('site1');
@@ -90,10 +143,10 @@ describe('SiteService', () => {
         { id: 1, name: 'doors 11', mpuri: 'makrohard.ru', vo: 'makrohard' }
       ];
       mockBackend.connections.subscribe((conn: MockConnection) => {
-        expect(conn.request.url).toBe('/sites/1/appliances');
+        expect(conn.request.url).toBe('/appliances');
         conn.mockRespond(new Response(new ResponseOptions({ body: response })));
       });
-      service.getAppliancesOnSite(1).subscribe(res => {
+      service.getAppliances().subscribe(res => {
         let appliances: Appliance[] = res;
         expect(appliances.length).toBe(2);
         appliances.forEach((appliance, index) => {
@@ -108,10 +161,10 @@ describe('SiteService', () => {
     it('should fetch appliance', () => {
       let response = { id: 1, name: 'doors 11', mpuri: 'makrohard.ru', vo: 'makrohard' };
       mockBackend.connections.subscribe((conn: MockConnection) => {
-        expect(conn.request.url).toBe('/sites/1/appliances/1');
+        expect(conn.request.url).toBe('/appliances/1');
         conn.mockRespond(new Response(new ResponseOptions({ body: response })));
       });
-      service.getApplianceOnSite(1, 1).subscribe(res => {
+      service.getAppliance(1).subscribe(res => {
         let appliance: Appliance = res;
         expect(appliance.id).toBe(1);
         expect(appliance.name).toBe('doors 11');
@@ -130,10 +183,10 @@ describe('SiteService', () => {
         {id: 2, name: 'amd', memory: 2048000, vcpu: 16, cpu: 16}
       ];
       mockBackend.connections.subscribe((conn: MockConnection) => {
-        expect(conn.request.url).toBe('/sites/1/flavours');
+        expect(conn.request.url).toBe('/appliances/1/sites/2/flavours');
         conn.mockRespond(new Response(new ResponseOptions({ body: response })));
       });
-      service.getFlavoursOnSite(1).subscribe(res => {
+      service.getFlavoursOnSiteForAppliance(1, 2).subscribe(res => {
         let flavours: Flavour[] = res;
         expect(flavours.length).toBe(2);
         flavours.forEach((flavour, index) => {
@@ -149,10 +202,10 @@ describe('SiteService', () => {
     it('should fetch flavour', () => {
       let response = {id: 1, name: 'intel', memory: 1024000, vcpu: 8, cpu: 4};
       mockBackend.connections.subscribe((conn: MockConnection) => {
-        expect(conn.request.url).toBe('/sites/1/flavours/1');
+        expect(conn.request.url).toBe('/appliances/3/sites/2/flavours/1');
         conn.mockRespond(new Response(new ResponseOptions({ body: response })));
       });
-      service.getFlavourOnSite(1, 1).subscribe(res => {
+      service.getFlavourOnSiteForAppliance(3, 2, 1).subscribe(res => {
         let flavour: Flavour = res;
         expect(flavour.id).toBe(1);
         expect(flavour.name).toBe('intel');
@@ -168,8 +221,18 @@ describe('SiteService', () => {
 
     it('should fetch instances', () => {
       let response = [
-        { id: 1, name: 'myInstance', credentials: [ { id: 1, type: 'sshKey', value: 'ssh-rsa abba1337' } ], applianceId: 1, flavourId: 1, userData: '' },
-        { id: 1, name: 'yourInstance', credentials: [ { id: 1, type: 'sshKey', value: 'ssh-rsa jasdfbjhasdf' } ], applianceId: 1, flavourId: 1, userData: '' }
+        { id: 1,
+          name: 'myInstance',
+          credentials: [ { id: 1, type: 'sshKey', value: 'ssh-rsa abba1337' } ],
+          applianceId: 1,
+          flavourId: 1,
+          userData: '' },
+        { id: 1,
+          name: 'yourInstance',
+          credentials: [ { id: 1, type: 'sshKey', value: 'ssh-rsa jasdfbjhasdf' } ],
+          applianceId: 1,
+          flavourId: 1,
+          userData: '' }
       ];
       mockBackend.connections.subscribe((conn: MockConnection) => {
         expect(conn.request.url).toBe('/sites/1/instances');

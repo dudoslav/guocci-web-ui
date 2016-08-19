@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Site } from './site/site';
-import { SiteService } from './site/site.service';
+import { Site } from './shared/site';
+import { GuocciService } from './shared/guocci.service';
 
 
 @Component({
@@ -13,12 +13,12 @@ export class InstanceListComponent implements OnInit {
   sites: Site[];
   selectedSite: Site;
 
-  constructor(private siteService: SiteService) {
+  constructor(private guocciService: GuocciService) {
 
   }
 
   ngOnInit() {
-    this.siteService.getSites().subscribe(res => this.sites = res as Site[]);
+    this.guocciService.getSites().subscribe(res => this.sites = res as Site[]);
   }
 
   onSelect(site: Site) {

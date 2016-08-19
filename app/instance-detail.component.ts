@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Instance } from './site/instance';
-import { Appliance } from './site/appliance';
-import { Flavour } from './site/flavour';
-import { Site } from './site/site';
+import { Instance } from './shared/instance';
+import { Appliance } from './shared/appliance';
+import { Flavour } from './shared/flavour';
+import { Site } from './shared/site';
 
-import { SiteService } from './site/site.service';
+import { GuocciService } from './shared/guocci.service';
 
 
 @Component({
@@ -20,17 +20,18 @@ export class InstanceDetailComponent implements OnInit {
   appliance: Appliance;
   flavour: Flavour;
 
-  constructor(private siteService: SiteService) {
+  constructor(private guocciService: GuocciService) {
 
   }
 
   ngOnInit() {
-    this.siteService.getApplianceOnSite(this.site.id, this.instance.applianceId).subscribe(res => this.appliance = res);
-    this.siteService.getFlavourOnSite(this.site.id, this.instance.flavourId).subscribe(res => this.flavour = res);
+    this.guocciService.getAppliance(this.instance.applianceId).subscribe(res => this.appliance = res);
+    this.guocciService.getFlavourOnSiteForAppliance(this.instance.applianceId, this.site.id, this.instance.flavourId)
+      .subscribe(res => this.flavour = res);
   }
 
   doDelete() {
-    this.siteService.deleteInstanceOnSite(this.site.id, this.instance.id)
+    this.guocciService.deleteInstanceOnSite(this.site.id, this.instance.id)
       .subscribe(res => console.log(res));
   }
 }

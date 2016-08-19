@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Site } from './site/site';
-import { Instance } from './site/instance';
-import { SiteService } from './site/site.service';
+import { Site } from './shared/site';
+import { Instance } from './shared/instance';
+import { GuocciService } from './shared/guocci.service';
 
 
 @Component({
@@ -14,12 +14,12 @@ export class SiteDetailComponent implements OnInit {
   site: Site;
   instances: Instance[];
 
-  constructor(private siteService: SiteService) {
+  constructor(private guocciService: GuocciService) {
 
   }
 
   ngOnInit() {
-    this.siteService.getInstancesOnSite(this.site.id)
+    this.guocciService.getInstancesOnSite(this.site.id)
       .subscribe(res => this.instances = res as Instance[]);
   }
 

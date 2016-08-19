@@ -4,7 +4,7 @@ import { RequestOptions, RequestOptionsArgs, RequestMethod, Headers } from '@ang
 @Injectable()
 export class AppRequestOptions extends RequestOptions {
 
-  private webApiBaseUrl: string = 'https://guocci-mock-server.herokuapp.com/v1';
+  webApiBaseUrl: string = 'https://guocci-mock-server.herokuapp.com/v1';
 
   merge(options?: RequestOptionsArgs): RequestOptions {
     let result = new AppRequestOptions(super.merge(options));

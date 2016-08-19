@@ -1,4 +1,4 @@
-import { Credential } from '../user/credential';
+import { Credential } from './credential';
 
 export class Instance {
   id: number;
