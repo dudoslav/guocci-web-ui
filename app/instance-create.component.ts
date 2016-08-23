@@ -1,21 +1,45 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { SelectItem } from 'primeng/primeng';
 
-import { Site } from './shared/site';
-import { Appliance } from './shared/appliance';
-import { Flavour } from './shared/flavour';
 import { Instance } from './shared/instance';
 import { Credential } from './shared/credential';
 import { GuocciService } from './shared/guocci.service';
 
+class MySelectItem implements SelectItem {
+  label: string;
+  value: any;
+  instance: any;
+
+  constructor(label: string, value: any, instance: any) {
+    this.label = label;
+    this.value = value;
+    this.instance = instance;
+  }
+}
+
 @Component({
   selector: 'instance-create',
   templateUrl: 'app/instance-create.component.html',
+  styles: [`
+    textarea {
+      width: 100%;
+    }
+    input {
+      width: 100%;
+    }
+    .flavour-listbox-head {
+      background-color: #FFFFFF;
+    }
+    .instance-form-container {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+  `]
 })
 export class InstanceCreateComponent implements OnInit {
-  sites: Site[];
-  appliances: Appliance[];
-  flavours: Flavour[];
+  appliances: SelectItem[];
+  sites: SelectItem[];
+  flavours: SelectItem[];
 
   instanceForm: FormGroup;
 
@@ -34,7 +58,10 @@ export class InstanceCreateComponent implements OnInit {
 
     this.guocciService.getAppliances()
       .subscribe(res => {
-        this.appliances = res;
+        this.appliances = [];
+        res.forEach((appliance) => {
+          this.appliances.push({ label: appliance.name, value: appliance.id });
+        });
         this.instanceForm.controls['appliance'].valueChanges.subscribe(id => this.onApplianceChange(id));
         this.instanceForm.controls['site'].valueChanges.subscribe(id => this.onSiteChange(id));
       });
@@ -43,13 +70,19 @@ export class InstanceCreateComponent implements OnInit {
   onApplianceChange(value: number) {
     this.sites = undefined;
     this.guocciService.getSitesForAppliance(value)
-      .subscribe(res => this.sites = res);
+      .subscribe(res => {
+        this.sites = [];
+        res.forEach(site => this.sites.push({ label: site.name, value: site.id }));
+      });
   }
 
   onSiteChange(value: number) {
     this.flavours = undefined;
     this.guocciService.getFlavoursOnSiteForAppliance(this.instanceForm.controls['appliance'].value, value)
-      .subscribe(res => this.flavours = res);
+      .subscribe(res => {
+        this.flavours = [];
+        res.forEach(flavour => this.flavours.push(new MySelectItem(flavour.name, flavour.id, flavour)));
+      });
   }
 
   doSubmit() {

@@ -9,14 +9,16 @@
     'ng2-translate':              'node_modules/ng2-translate',
     'app':                        'app', // 'dist',
     '@angular':                   'node_modules/@angular',
-    'rxjs':                       'node_modules/rxjs'
+    'rxjs':                       'node_modules/rxjs',
+    'primeng':                    'node_modules/primeng'
   };
 
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {
     'ng2-translate':              { main: 'ng2-translate.js', defaultExtension: 'js' },
     'app':                        { main: 'main.js',  defaultExtension: 'js' },
-    'rxjs':                       { defaultExtension: 'js' }
+    'rxjs':                       { defaultExtension: 'js' },
+    'primeng':                    { defaultExtension: 'js' }
   };
 
   var ngPackageNames = [

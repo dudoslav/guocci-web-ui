@@ -1,18 +1,18 @@
-<div *ngIf="instance" class="container-fluid well">
-  <div class="row">
-    <div class="col-sm-10">
+<div *ngIf="instance">
+  <div class="ui-g">
+    <div class="ui-g-10">
       <h3>{{instance.name}}</h3>
-      <div class="row">
-        <div class="col-sm-6" *ngIf="appliance">
+      <div class="ui-g">
+        <div class="ui-g-6" *ngIf="appliance">
           <p>{{appliance.name}}</p>
         </div>
-        <div class="col-sm-6" *ngIf="flavour">
+        <div class="ui-g-6" *ngIf="flavour">
           <p>{{flavour.name}}</p>
         </div>
       </div>
     </div>
-    <div class="col-sm-2">
-      <button type="button" class="btn btn-block btn-danger" (click)="doDelete()">{{ 'INSTANCE-DELETE' | translate }}</button>
+    <div class="ui-g-2">
+      <button class="gbutton-danger" pButton label="{{ 'INSTANCE-DELETE' | translate }}" type="button" (click)="doDelete()"></button>
     </div>
   </div>
 </div>

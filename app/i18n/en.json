@@ -5,6 +5,9 @@
   "PUBLIC-SSH-KEY" : "Public SSH Key",
   "APPLIANCE" : "Appliance",
   "FLAVOUR" : "Flavour",
+  "FLAVOUR-CPU" : "CPU",
+  "FLAVOUR-NAME" : "Name",
+  "FLAVOUR-MEMORY" : "Memory",
   "SITE" : "Site",
   "BACK" : "Back",
   "SUBMIT" : "Submit"
