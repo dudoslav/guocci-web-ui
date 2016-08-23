@@ -23,4 +23,10 @@ export class SiteDetailComponent implements OnInit {
       .subscribe(res => this.instances = res as Instance[]);
   }
 
+  onInstanceDeleted(event: any) {
+    if (event.value) {
+      this.ngOnInit();
+    }
+  }
+
 }

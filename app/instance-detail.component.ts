@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 
 import { Instance } from './shared/instance';
 import { Appliance } from './shared/appliance';
@@ -17,6 +17,8 @@ export class InstanceDetailComponent implements OnInit {
   instance: Instance;
   @Input()
   site: Site;
+  @Output()
+  onInstanceDelete = new EventEmitter();
   appliance: Appliance;
   flavour: Flavour;
 
@@ -32,6 +34,6 @@ export class InstanceDetailComponent implements OnInit {
 
   doDelete() {
     this.guocciService.deleteInstanceOnSite(this.site.id, this.instance.id)
-      .subscribe(res => console.log(res));
+      .subscribe(res => { console.log(res); this.onInstanceDelete.emit({ value: true }); });
   }
 }
