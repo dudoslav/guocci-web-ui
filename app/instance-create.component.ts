@@ -25,9 +25,6 @@ class MySelectItem implements SelectItem {
     textarea {
       width: 100%;
     }
-    input {
-      width: 100%;
-    }
     .flavour-listbox-head {
       background-color: #FFFFFF;
     }
