@@ -4,6 +4,16 @@
     <div class="ui-grid-col-3"></div>
     <form class="ui-grid-col-6 instance-form-container" [formGroup]="instanceForm">
 
+      <div>
+        <label for="instance-name">{{ 'INSTANCE-NAME' | translate }}</label>
+        <input type="text" pInputText formControlName="name">
+      </div>
+
+      <div>
+        <label for="public-ssh-key">{{ 'PUBLIC-SSH-KEY' | translate }}</label>
+        <textarea rows="5" pInputTextarea autoResize="autoResize" formControlName="key"></textarea>
+      </div>
+
       <div *ngIf="appliances">
         <label for="appliance">{{ 'APPLIANCE' | translate }}</label>
         <p-selectButton [options]="appliances" formControlName="appliance"></p-selectButton>
@@ -30,16 +40,6 @@
             </div>
           </template>
         </p-listbox>
-      </div>
-
-      <div>
-        <label for="instance-name">{{ 'INSTANCE-NAME' | translate }}</label>
-        <input type="text" pInputText formControlName="name">
-      </div>
-
-      <div>
-        <label for="public-ssh-key">{{ 'PUBLIC-SSH-KEY' | translate }}</label>
-        <textarea rows="5" pInputTextarea autoResize="autoResize" formControlName="key"></textarea>
       </div>
 
       <div class="ui-grid-row">

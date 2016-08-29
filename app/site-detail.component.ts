@@ -25,7 +25,7 @@ export class SiteDetailComponent implements OnInit {
 
   onInstanceDeleted(event: any) {
     if (event.value) {
-      this.ngOnInit();
+      this.instances.splice(this.instances.indexOf(event.value), 1);
     }
   }
 

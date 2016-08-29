@@ -1,8 +1,7 @@
-<div *ngIf="site" class="panel panel-info">
-  <div class="panel-heading">
-    <h3 class="panel-title">{{site.name}}</h3>
-  </div>
-  <div class="panel-body">
-    <instance-detail *ngFor="let instance of instances" [instance]="instance" [site]="site"></instance-detail>
-  </div>
+<div *ngIf="instances">
+  <p-dataList [value]="instances" [rows]="10">
+    <template let-instance>
+        <instance-detail [site]="site" [instance]="instance" (onInstanceDelete)="onInstanceDeleted($event)"></instance-detail>
+    </template>
+  </p-dataList>
 </div>

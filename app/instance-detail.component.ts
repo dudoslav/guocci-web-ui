@@ -10,7 +10,12 @@ import { GuocciService } from './shared/guocci.service';
 
 @Component({
   selector: 'instance-detail',
-  templateUrl: 'app/instance-detail.component.html'
+  templateUrl: 'app/instance-detail.component.html',
+  styles: [`
+  .instance-detail-container {
+    border-bottom: 3px solid #D5D5D5;
+  }
+  `]
 })
 export class InstanceDetailComponent implements OnInit {
   @Input()
@@ -34,6 +39,6 @@ export class InstanceDetailComponent implements OnInit {
 
   doDelete() {
     this.guocciService.deleteInstanceOnSite(this.site.id, this.instance.id)
-      .subscribe(res => { console.log(res); this.onInstanceDelete.emit({ value: true }); });
+      .subscribe(res => this.onInstanceDelete.emit({ value: this.instance }));
   }
 }

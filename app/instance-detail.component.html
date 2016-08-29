@@ -1,18 +1,36 @@
 <div *ngIf="instance">
-  <div class="ui-g">
-    <div class="ui-g-10">
-      <h3>{{instance.name}}</h3>
-      <div class="ui-g">
-        <div class="ui-g-6" *ngIf="appliance">
-          <p>{{appliance.name}}</p>
-        </div>
-        <div class="ui-g-6" *ngIf="flavour">
-          <p>{{flavour.name}}</p>
-        </div>
+  <div class="ui-grid ui-grid-responsive ui-fluid instance-detail-container">
+    <div class="ui-grid-row">
+      <h3 class="ui-grid-col-10">{{instance.name}}</h3>
+      <div class="ui-grid-col-2 ui-grid-row">
+        <h3><i class="fa fa-search" style="cursor:pointer;"></i></h3>
+        <h3><i class="fa fa-remove" style="cursor:pointer;" (click)="doDelete()"></i></h3>
       </div>
     </div>
-    <div class="ui-g-2">
-      <button class="gbutton-danger" pButton label="{{ 'INSTANCE-DELETE' | translate }}" type="button" (click)="doDelete()"></button>
+    <div class="ui-grid-row">
+
+      <div *ngIf="flavour" class="ui-grid-col-6">
+
+        <div class="ui-grid-col-6">
+          {{ 'FLAVOUR' | translate }}:
+        </div>
+        <div class="ui-grid-col-6">
+          {{flavour.name}}
+        </div>
+
+      </div>
+
+      <div *ngIf="appliance" class="ui-grid-col-6">
+
+        <div class="ui-grid-col-6">
+          {{ 'APPLIANCE' | translate }}:
+        </div>
+        <div class="ui-grid-col-6">
+          {{appliance.name}}
+        </div>
+
+      </div>
+
     </div>
   </div>
 </div>

@@ -66,6 +66,7 @@ export class InstanceCreateComponent implements OnInit {
 
   onApplianceChange(value: number) {
     this.sites = undefined;
+    this.instanceForm.controls['site'].reset();
     this.guocciService.getSitesForAppliance(value)
       .subscribe(res => {
         this.sites = [];
@@ -75,11 +76,14 @@ export class InstanceCreateComponent implements OnInit {
 
   onSiteChange(value: number) {
     this.flavours = undefined;
-    this.guocciService.getFlavoursOnSiteForAppliance(this.instanceForm.controls['appliance'].value, value)
-      .subscribe(res => {
-        this.flavours = [];
-        res.forEach(flavour => this.flavours.push(new MySelectItem(flavour.name, flavour.id, flavour)));
-      });
+    this.instanceForm.controls['flavour'].reset();
+    if (this.instanceForm.value.site) {
+      this.guocciService.getFlavoursOnSiteForAppliance(this.instanceForm.controls['appliance'].value, value)
+        .subscribe(res => {
+          this.flavours = [];
+          res.forEach(flavour => this.flavours.push(new MySelectItem(flavour.name, flavour.id, flavour)));
+        });
+    }
   }
 
   doSubmit() {

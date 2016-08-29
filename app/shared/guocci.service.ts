@@ -67,8 +67,7 @@ export class GuocciService {
   }
 
   deleteInstanceOnSite(siteId: number, instanceId: number) {
-    return this.http.delete(`/sites/${siteId}/instances/${instanceId}`)
-      .map(res => res.json());
+    return this.http.delete(`/sites/${siteId}/instances/${instanceId}`);
   }
 
 }
