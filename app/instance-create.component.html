@@ -27,9 +27,9 @@
       <div *ngIf="flavours">
         <label for="flavours">{{ 'FLAVOUR' | translate }}</label>
         <div class="ui-grid-row flavour-listbox-head">
-          <div class="ui-grid-col-4"><span>{{ 'FLAVOUR-NAME' | translate }}</span></div>
-          <div class="ui-grid-col-4"><span>{{ 'FLAVOUR-CPU' | translate }}</span></div>
-          <div class="ui-grid-col-4"><span>{{ 'FLAVOUR-MEMORY' | translate }}</span></div>
+          <div class="ui-grid-col-4"><span>{{ 'FLAVOUR-TABLE-NAME' | translate }}</span></div>
+          <div class="ui-grid-col-4"><span>{{ 'FLAVOUR-TABLE-CPU' | translate }}</span></div>
+          <div class="ui-grid-col-4"><span>{{ 'FLAVOUR-TABLE-MEMORY' | translate }}</span></div>
         </div>
         <p-listbox [options]="flavours" formControlName="flavour">
           <template let-flavour>

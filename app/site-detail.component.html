@@ -1,7 +1,29 @@
 <div *ngIf="instances">
   <p-dataList [value]="instances" [rows]="10">
     <template let-instance>
-        <instance-detail [site]="site" [instance]="instance" (onInstanceDelete)="onInstanceDeleted($event)"></instance-detail>
+        <div *ngIf="instance" (click)="onInstanceSelect(instance)">
+          <div class="ui-grid ui-grid-responsive ui-fluid instance-detail-container">
+            <h3 style="text-align: center;">{{instance.name}}</h3>
+          </div>
+        </div>
     </template>
   </p-dataList>
 </div>
+
+<p-dialog header="Instance detail" [(visible)]="showDialog" [responsive]="true" showEffect="fade" [modal]="true" width="500">
+  <div style="text-align: center;" class="ui-grid ui-grid-responsive ui-fluid" *ngIf="selectedInstance">
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-4">{{ 'INSTANCE-NAME' | translate }}:</div>
+      <div class="ui-grid-col-8">{{ selectedInstance.name }}</div>
+    </div>
+    <div class="ui-grid-row" *ngIf="selectedInstanceAppliance">
+      <div class="ui-grid-col-4">{{ 'APPLIANCE-NAME' | translate }}:</div>
+      <div class="ui-grid-col-8">{{ selectedInstanceAppliance.name }}</div>
+    </div>
+    <div class="ui-grid-row" *ngIf="selectedInstanceFlavour">
+      <div class="ui-grid-col-4">{{ 'FLAVOUR-NAME' | translate }}:</div>
+      <div class="ui-grid-col-8">{{ selectedInstanceFlavour.name }}</div>
+    </div>
+    <button class="gbutton-danger" pButton type="button" label="{{ 'INSTANCE-DELETE' | translate }}" (click)="deleteSelectedInstance()"></button>
+  </div>
+</p-dialog>

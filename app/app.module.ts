@@ -11,13 +11,13 @@ import { ButtonModule,
   GrowlModule,
   AccordionModule,
   DataListModule,
+  DialogModule,
   ToolbarModule } from 'primeng/primeng';
 
 import { routing } from './app.routing';
 import { AppComponent } from './app.component';
 import { GuocciService } from './shared/guocci.service';
 import { NavbarComponent } from './navbar.component';
-import { InstanceDetailComponent } from './instance-detail.component';
 import { InstanceListComponent } from './instance-list.component';
 import { InstanceCreateComponent } from './instance-create.component';
 import { SiteDetailComponent } from './site-detail.component';
@@ -41,9 +41,9 @@ import { AppRequestOptions } from './app.request.options';
     AccordionModule,
     DataListModule,
     ToolbarModule,
+    DialogModule,
     routing ],
   declarations: [ AppComponent,
-    InstanceDetailComponent,
     InstanceListComponent,
     InstanceCreateComponent,
     SiteDetailComponent,
