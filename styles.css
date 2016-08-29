@@ -1,6 +1,7 @@
 body {
   background-image: url('/app/assets/img/background.jpg');
   background-size: cover;
+  margin: 0px;
 }
 
 .gbutton-warning {
@@ -11,4 +12,9 @@ body {
 .gbutton-danger {
   background-color: #ff471a !important;
   border-color: #ff471a !important;
+}
+
+.ui-toolbar {
+  margin-bottom: 50px;
+  padding: 10px;
 }

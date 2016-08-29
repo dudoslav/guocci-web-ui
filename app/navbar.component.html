@@ -1,11 +1,14 @@
-<nav class="navbar navbar-default">
-    <div>
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">GUOCCI</a>
-        </div>
+<p-toolbar>
+    <div class="ui-toolbar-group-left">
+        <a routerLink="/sites">GUOCCI</a>
+
+        <i class="fa fa-bars"></i>
+
+        <span *ngIf="user"><i class="fa fa-user"></i> {{user.name}}</span>
     </div>
-    <div *ngIf="user">
-        <p class="navbar-text"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{user.name}}</p>
-        <p class="navbar-text">email: {{user.email}}</p>
+
+    <div class="ui-toolbar-group-right">
+        <span *ngIf="user"><i class="fa fa-envelope"></i> {{user.email}}</span>
     </div>
-</nav>
+
+</p-toolbar>

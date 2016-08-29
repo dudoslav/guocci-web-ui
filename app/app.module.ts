@@ -4,7 +4,14 @@ import { HttpModule, RequestOptions, Http } from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
-import { ButtonModule, InputTextModule, SelectButtonModule, ListboxModule, GrowlModule, AccordionModule, DataListModule } from 'primeng/primeng';
+import { ButtonModule,
+  InputTextModule,
+  SelectButtonModule,
+  ListboxModule,
+  GrowlModule,
+  AccordionModule,
+  DataListModule,
+  ToolbarModule } from 'primeng/primeng';
 
 import { routing } from './app.routing';
 import { AppComponent } from './app.component';
@@ -33,6 +40,7 @@ import { AppRequestOptions } from './app.request.options';
     GrowlModule,
     AccordionModule,
     DataListModule,
+    ToolbarModule,
     routing ],
   declarations: [ AppComponent,
     InstanceDetailComponent,
