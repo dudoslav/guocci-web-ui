@@ -2,13 +2,12 @@
     <div class="ui-toolbar-group-left">
         <a routerLink="/sites">GUOCCI</a>
 
-        <i class="fa fa-bars"></i>
-
-        <span *ngIf="user"><i class="fa fa-user"></i> {{user.name}}</span>
     </div>
 
     <div class="ui-toolbar-group-right">
-        <span *ngIf="user"><i class="fa fa-envelope"></i> {{user.email}}</span>
+      <span *ngIf="user"><i class="fa fa-user"></i> {{user.name}}</span>
+      <br>
+      <span *ngIf="user"><i class="fa fa-envelope"></i> {{user.email}}</span>
     </div>
 
 </p-toolbar>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Instance } from './shared/instance';
 import { Site } from './shared/site';
 import { GuocciService } from './shared/guocci.service';
 
@@ -10,19 +11,31 @@ import { GuocciService } from './shared/guocci.service';
 })
 export class InstanceListComponent implements OnInit {
 
-  sites: Site[];
-  selectedSite: Site;
+  instancesData: [ Site, Instance ][];
 
   constructor(private guocciService: GuocciService) {
 
   }
 
   ngOnInit() {
-    this.guocciService.getSites().subscribe(res => this.sites = res as Site[]);
+    this.guocciService.getAllInstances().subscribe(res => {
+      this.getInstanceData(res[1], res[0]);
+    });
   }
 
-  onSelect(site: Site) {
-    this.selectedSite = site;
+  getInstanceData(sites: Site[], instances: Instance[][]) {
+    let result: [ Site, Instance ][] = [];
+    instances.forEach((siteInstances, index) => {
+      for (let i = 0; i < siteInstances.length; i++) {
+        result.push([ sites[index], siteInstances[i] ]);
+      }
+    });
+    this.instancesData = result;
+  }
+
+  onInstanceDeleteRequest(request: any) {
+    this.guocciService.deleteInstanceOnSite(request.siteId, request.instanceId)
+      .subscribe(res => this.ngOnInit());
   }
 
 }

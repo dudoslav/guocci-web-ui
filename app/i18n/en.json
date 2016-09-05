@@ -1,6 +1,6 @@
 {
   "INSTANCE-CREATE" : "Create new Instance",
-  "INSTANCE-DELETE" : "Delete Instance",
+  "INSTANCE-DELETE" : "Delete",
   "INSTANCE-NAME" : "Instance name",
   "PUBLIC-SSH-KEY" : "Public SSH Key",
   "APPLIANCE" : "Appliance",

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Rx';
 
 import { Site } from './site';
 import { Appliance } from './appliance';
@@ -59,6 +60,13 @@ export class GuocciService {
   getInstancesOnSite(siteId: number) {
     return this.http.get(`/sites/${siteId}/instances`)
       .map(res => res.json() as Instance[]);
+  }
+
+  getAllInstances() {
+    return this.getSites()
+      .flatMap(sites => {
+        return Observable.forkJoin(Observable.forkJoin(sites.map((site: Site) => this.getInstancesOnSite(site.id))), Observable.of(sites));
+      });
   }
 
   createInstanceOnSite(siteId: number, instance: Instance) {
