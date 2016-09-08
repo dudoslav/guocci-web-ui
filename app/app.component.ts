@@ -10,7 +10,7 @@ export class AppComponent {
 
   constructor(private translateService: TranslateService) {
     translateService.setDefaultLang('en');
-    let lang = navigator.userLanguage || navigator.language;
+    let lang = navigator.language;
     if (lang) {
      translateService.use(lang.split('-')[0]);
     }

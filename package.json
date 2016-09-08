@@ -22,17 +22,14 @@
   "author": "Dusan Baran",
   "license": "ISC",
   "dependencies": {
-    "@angular/common": "2.0.0-rc.5",
-    "@angular/compiler": "2.0.0-rc.5",
-    "@angular/core": "2.0.0-rc.5",
-    "@angular/forms": "0.3.0",
-    "@angular/http": "2.0.0-rc.5",
-    "@angular/platform-browser": "2.0.0-rc.5",
-    "@angular/platform-browser-dynamic": "2.0.0-rc.5",
-    "@angular/router": "3.0.0-rc.1",
-    "@angular/router-deprecated": "2.0.0-rc.2",
-    "@angular/upgrade": "2.0.0-rc.5",
-    "bootstrap": "^3.3.7",
+    "@angular/common": "2.0.0-rc.6",
+    "@angular/compiler": "2.0.0-rc.6",
+    "@angular/core": "2.0.0-rc.6",
+    "@angular/forms": "2.0.0-rc.6",
+    "@angular/http": "2.0.0-rc.6",
+    "@angular/platform-browser": "2.0.0-rc.6",
+    "@angular/platform-browser-dynamic": "2.0.0-rc.6",
+    "@angular/router": "^3.0.0-rc.2",
     "core-js": "^2.4.0",
     "font-awesome": "^4.6.3",
     "lodash": "^4.15.0",
@@ -40,9 +37,9 @@
     "primeng": "^1.0.0-beta.13",
     "primeui": "^4.1.15",
     "reflect-metadata": "^0.1.8",
-    "rxjs": "5.0.0-beta.6",
-    "systemjs": "0.19.27",
-    "zone.js": "0.6.12"
+    "rxjs": "5.0.0-beta.11",
+    "systemjs": "0.19.37",
+    "zone.js": "0.6.17"
   },
   "devDependencies": {
     "canonical-path": "0.0.2",
@@ -60,7 +57,7 @@
     "protractor": "^3.3.0",
     "rimraf": "^2.5.2",
     "tslint": "^3.7.4",
-    "typescript": "^1.8.10",
+    "typescript": "^2.0.0",
     "typings": "^1.0.4"
   },
   "repository": {}
