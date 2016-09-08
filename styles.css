@@ -8,15 +8,15 @@ body {
 }
 
 .gbutton-danger {
-  background-color: #ff471a !important;
-  border-color: #ff471a !important;
+  background-color: #E53935 !important;
+  border-color: #E53935 !important;
 }
 
 .ui-button, button.ui-button.ui-state-default, .ui-button.ui-state-default {
   box-shadow: 0px 3px 1px #888888;
   border-radius: 0px;
-  background-color: #0000cc;
-  border-color: #0000cc;
+  background-color: #3F51B5;
+  border-color: #3F51B5;
 }
 
 .ui-button-text {
@@ -29,9 +29,9 @@ body {
   border-radius: 0px;
   margin-bottom: 50px;
   padding: 20px;
-  background: #0000cc;
-  background-color: #0000cc;
-  border-color: #0000cc;
+  background: #3F51B5;
+  background-color: #3F51B5;
+  border-color: #3F51B5;
   color: #ffffff;
 }
 

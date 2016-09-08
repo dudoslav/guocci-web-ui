@@ -5,7 +5,16 @@ import { User } from './shared/user';
 
 @Component({
     selector: 'guocci-navbar',
-    templateUrl: 'app/navbar.component.html'
+    templateUrl: 'app/navbar.component.html',
+    styles: [`
+    .guocci-logo {
+      margin: 0px;
+    }
+
+    .guocci-logo a {
+      text-decoration:none;
+    }
+    `]
 })
 export class NavbarComponent implements OnInit {
     user: User;
