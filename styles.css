@@ -1,5 +1,10 @@
 body {
   margin: 0px;
+  font-family: "Roboto", "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+h1, h2, h3, h4, h5 {
+  margin: 0px;
 }
 
 .gbutton-warning {
@@ -22,6 +27,10 @@ body {
 .ui-button-text {
   padding-left: 0px !important;
   padding-right: 0px !important;
+}
+
+.ui-button-icon-only .fa {
+  margin-left: -29%;
 }
 
 .ui-toolbar {

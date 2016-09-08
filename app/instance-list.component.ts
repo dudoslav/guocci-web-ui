@@ -8,6 +8,13 @@ import { GuocciService } from './shared/guocci.service';
 @Component({
   selector: 'instance-list',
   templateUrl: 'app/instance-list.component.html',
+  styles: [`
+  .round-button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+  }
+  `]
 })
 export class InstanceListComponent implements OnInit {
 
