@@ -1,12 +1,12 @@
-<div class="ui-grid ui-grid-responsive ui-fluid" style="border:1px solid #D5D5D5; padding:5px; margin:10px 0px; box-shadow: 0px 3px 1px #888888;">
-  <div class="ui-grid-row">
-    <div class="ui-grid-col-2"><h1><i class="fa fa-desktop" aria-hidden="true"></i></h1></div>
-    <div class="ui-grid-col-8">
-      <h4>{{instanceData[1].name}}</h4>
-      <p *ngIf="appliance">{{appliance.name}}</p>
+<li class="z-depth-1 instance-detail-li">
+  <div class="row instance-detail-row">
+    <div class="col s2"><h2><i class="fa fa-desktop"></i></h2></div>
+    <div class="col s8">
+      <h5>{{instanceData[1].name}}</h5>
+      <p *ngIf="appliance" class="instance-detail-text">{{appliance.name}}</p>
     </div>
-    <div class="ui-grid-col-2">
-      <button (click)="doDelete()" type="button" pButton class="gbutton-danger" label="{{ 'INSTANCE-DELETE' | translate }}"></button>
+    <div class="col s2">
+      <button (click)="doDelete()" class="waves-effect waves-light btn btn-block red darken-1">{{ 'INSTANCE-DELETE' | translate }}</button>
     </div>
   </div>
-</div>
+</li>

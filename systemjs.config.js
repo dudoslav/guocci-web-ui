@@ -1,5 +1,6 @@
 (function (global) {
   System.config({
+    defaultJSExtensions: true,
     paths: {
       // paths serve as alias
       'npm:': 'node_modules/'
@@ -20,7 +21,8 @@
       // other libraries
       'rxjs':                       'npm:rxjs',
       'ng2-translate':              'npm:ng2-translate',
-      'primeng':                    'npm:primeng',
+      'materialize-css':            'npm:materialize-css',
+      'angular2-materialize':       'npm:angular2-materialize'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -35,7 +37,11 @@
         main: './ng2-translate.js',
         defaultExtension: 'js'
       },
-      primeng: {
+      'materialize-css': {
+        main: 'dist/js/materialize'
+      },
+      'angular2-materialize': {
+        main: './dist/materialize-directive',
         defaultExtension: 'js'
       }
     }

@@ -26,7 +26,7 @@ export class InstanceListComponent implements OnInit {
 
   ngOnInit() {
     this.guocciService.getAllInstances().subscribe(res => {
-      this.getInstanceData(res[1], res[0]);
+      this.getInstanceData(res[1], res[0] as Instance[][]);
     });
   }
 

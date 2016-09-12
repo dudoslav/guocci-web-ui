@@ -1,16 +1,15 @@
-<div class="ui-grid ui-grid-responsive ui-grid-pad">
-  <div class="ui-grid-row">
-    <div class="ui-grid-col-3"></div>
-    <div class="ui-grid-col-6">
-      <div class="ui-grid-row">
-        <div class="ui-grid-col-6"><h3>{{ 'YOUR-INSTANCES' | translate }}</h3></div>
-        <div class="ui-grid-col-6" style="text-align: right;"><a pButton type="button" icon="fa-plus" routerLink="/sites/instances/create" class="round-button"></a></div>
+<div class="row">
+  <div class="col s6 offset-s3">
+    <div class="row">
+      <div class="left">
+        <h5>{{ 'YOUR-INSTANCES' | translate }}</h5>
       </div>
-      <p-dataList [value]="instancesData">
-        <template let-instanceData>
-          <instance-detail [instanceData]="instanceData" (onInstanceDelete)="onInstanceDeleteRequest($event)"></instance-detail>
-        </template>
-      </p-dataList>
+      <div class="right">
+        <h5><a class="btn-floating btn-medium waves-effect waves-light indigo"><i class="fa fa-plus"></i></a></h5>
+      </div>
     </div>
+    <ul>
+      <instance-detail *ngFor="let instanceData of instancesData" [instanceData]="instanceData"></instance-detail>
+    </ul>
   </div>
 </div>

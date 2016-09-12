@@ -7,12 +7,9 @@ import { User } from './shared/user';
     selector: 'guocci-navbar',
     templateUrl: 'app/navbar.component.html',
     styles: [`
-    .guocci-logo {
-      margin: 0px;
-    }
-
-    .guocci-logo a {
-      text-decoration:none;
+    .guocci-navbar {
+      padding: 0px 10px;
+      margin-bottom: 50px;
     }
     `]
 })

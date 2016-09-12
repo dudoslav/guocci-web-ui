@@ -1,54 +1,21 @@
-body {
-  margin: 0px;
-  font-family: "Roboto", "Trebuchet MS", Arial, Helvetica, sans-serif;
+.btn-block {
+  width: 100%;
+  padding: 0px;
 }
 
 h1, h2, h3, h4, h5 {
+  margin: 5px;
+}
+
+.col {
+  padding: 0px !important;
+}
+
+.row {
+  padding: 0px !important;
+  margin: 0px !important;
+}
+
+ul {
   margin: 0px;
 }
-
-.gbutton-warning {
-  background-color: #ff8000 !important;
-  border-color: #ff8000 !important;
-}
-
-.gbutton-danger {
-  background-color: #E53935 !important;
-  border-color: #E53935 !important;
-}
-
-.ui-button, button.ui-button.ui-state-default, .ui-button.ui-state-default {
-  box-shadow: 0px 3px 1px #888888;
-  border-radius: 0px;
-  background-color: #3F51B5;
-  border-color: #3F51B5;
-}
-
-.ui-button-text {
-  padding-left: 0px !important;
-  padding-right: 0px !important;
-}
-
-.ui-button-icon-only .fa {
-  margin-left: -29%;
-}
-
-.ui-toolbar {
-  box-shadow: 0px 3px 1px #888888;
-  border-radius: 0px;
-  margin-bottom: 50px;
-  padding: 20px;
-  background: #3F51B5;
-  background-color: #3F51B5;
-  border-color: #3F51B5;
-  color: #ffffff;
-}
-
-.ui-toolbar  a {
-  color: #ffffff;
-}
-
-.ui-widget-content {
-  border: 0px;
-}
-
