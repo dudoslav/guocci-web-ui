@@ -1,6 +1,5 @@
 /// <reference path="../../typings/globals/jasmine/index.d.ts" />
 /*import { inject, TestBed } from '@angular/core/testing';
-import { provide } from '@angular/core';
 import { BaseRequestOptions, Http, Response, ResponseOptions, HttpModule } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 
@@ -18,10 +17,9 @@ beforeEach(() => {
       GuocciService,
       MockBackend,
       BaseRequestOptions,
-      provide(Http, {
+      { provide: Http,
         useFactory: (backend: MockBackend, options: BaseRequestOptions) => new Http(backend, options),
-        deps: [ MockBackend, BaseRequestOptions ]
-      })
+        deps: [ MockBackend, BaseRequestOptions ] }
     ],
     imports: [
       HttpModule

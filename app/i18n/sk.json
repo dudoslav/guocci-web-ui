@@ -1,0 +1,11 @@
+{
+  "INSTANCE-CREATE" : "Vytvorit novu instanciu",
+  "INSTANCE-DELETE" : "Vymazat instanciu",
+  "INSTANCE-NAME" : "Meno instancie",
+  "PUBLIC-SSH-KEY" : "Verejny SSH kluc",
+  "APPLIANCE" : "Vyuzitie",
+  "FLAVOUR" : "Chut xD",
+  "SITE" : "Stranka",
+  "BACK" : "Spet",
+  "SUBMIT" : "Potvrdit"
+}
