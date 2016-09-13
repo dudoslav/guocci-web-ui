@@ -1,17 +1,17 @@
 {
   "INSTANCE-CREATE" : "Create new Instance",
-  "INSTANCE-DELETE" : "Delete",
   "INSTANCE-NAME" : "Instance name",
+  "INSTANCE-MODAL-TEXT" : "Are you sure you want to delete:",
+  "INSTANCE-DELETE-SUCCESS" : "Successfully deleted",
   "PUBLIC-SSH-KEY" : "Public SSH Key",
   "APPLIANCE" : "Appliance",
   "APPLIANCE-NAME" : "Appliance name",
   "FLAVOUR" : "Flavour",
   "FLAVOUR-NAME" : "Flavour name",
-  "FLAVOUR-TABLE-CPU" : "CPU",
-  "FLAVOUR-TABLE-MEMORY" : "Memory",
-  "FLAVOUR-TABLE-NAME" : "Name",
   "SITE" : "Site",
   "BACK" : "Back",
   "SUBMIT" : "Submit",
+  "DELETE" : "Delete",
+  "CANCEL" : "Cancel",
   "YOUR-INSTANCES" : "Your Instances"
 }

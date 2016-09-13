@@ -19,3 +19,13 @@ h1, h2, h3, h4, h5 {
 ul {
   margin: 0px;
 }
+
+.modal {
+  width: 40%;
+  margin-top: 200px;
+  border-radius: 0px;
+}
+
+.btn {
+  border-radius: 0px;
+}

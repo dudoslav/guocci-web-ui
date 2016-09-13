@@ -48,6 +48,6 @@ export class InstanceDetailComponent implements OnInit {
   }
 
   doDelete() {
-    this.onInstanceDelete.emit({ instanceId: this.instanceData[1].id, siteId: this.instanceData[0].id });
+    this.onInstanceDelete.emit({ instance: this.instanceData[1], site: this.instanceData[0] });
   }
 }

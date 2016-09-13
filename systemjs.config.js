@@ -38,10 +38,11 @@
         defaultExtension: 'js'
       },
       'materialize-css': {
-        main: 'dist/js/materialize'
+        format: 'global',
+        main: 'dist/js/materialize.js'
       },
       'angular2-materialize': {
-        main: './dist/materialize-directive',
+        main: './dist/index.js',
         defaultExtension: 'js'
       }
     }

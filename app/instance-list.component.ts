@@ -1,24 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Instance } from './shared/instance';
 import { Site } from './shared/site';
 import { GuocciService } from './shared/guocci.service';
+import { InstanceDeleteModalComponent } from './instance-delete-modal.component';
 
 
 @Component({
   selector: 'instance-list',
-  templateUrl: 'app/instance-list.component.html',
-  styles: [`
-  .round-button {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-  }
-  `]
+  templateUrl: 'app/instance-list.component.html'
 })
 export class InstanceListComponent implements OnInit {
 
   instancesData: [ Site, Instance ][];
+  @ViewChild(InstanceDeleteModalComponent)
+  private instanceDeleteModal: InstanceDeleteModalComponent;
 
   constructor(private guocciService: GuocciService) {
 
@@ -41,8 +37,14 @@ export class InstanceListComponent implements OnInit {
   }
 
   onInstanceDeleteRequest(request: any) {
-    this.guocciService.deleteInstanceOnSite(request.siteId, request.instanceId)
-      .subscribe(res => this.ngOnInit());
+    this.instanceDeleteModal.show(request.instance, request.site);
+  }
+
+  onInstanceDeleteConfirm(event: any) {
+    this.guocciService.deleteInstanceOnSite(event.site.id, event.instance.id)
+      .subscribe(res => {
+        this.ngOnInit();
+      });
   }
 
 }

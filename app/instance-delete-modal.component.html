@@ -1,0 +1,17 @@
+<div id="modal1" class="modal" materialize [materializeActions]="actions">
+  <div class="modal-content center">
+    <h2><i class="fa fa-exclamation"></i></h2>
+    <h5 class="instance-delete-modal-text">{{ 'INSTANCE-MODAL-TEXT' | translate }}</h5>
+    <h5 *ngIf="instance">{{ instance.name }}</h5>
+  </div>
+  <div class="modal-footer">
+    <div class="row">
+      <div class="col s6">
+        <button (click)="cancel()" class="modal-action modal-close waves-effect waves-green btn btn-block grey">{{ 'CANCEL' | translate }}</button>
+      </div>
+      <div class="col s6">
+        <button (click)="delete()" class="modal-action modal-close waves-effect waves-green btn btn-block red darken-1">{{ 'DELETE' | translate }}</button>
+      </div>
+    </div>
+  </div>
+</div>

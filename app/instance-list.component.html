@@ -9,7 +9,9 @@
       </div>
     </div>
     <ul>
-      <instance-detail *ngFor="let instanceData of instancesData" [instanceData]="instanceData"></instance-detail>
+      <instance-detail *ngFor="let instanceData of instancesData" [instanceData]="instanceData" (onInstanceDelete)="onInstanceDeleteRequest($event)"></instance-detail>
     </ul>
   </div>
 </div>
+
+<instance-delete-modal (onDeleteConfirm)="onInstanceDeleteConfirm($event)"></instance-delete-modal>
