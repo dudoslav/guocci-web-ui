@@ -8,21 +8,16 @@ import { GuocciService } from './shared/guocci.service';
 
 
 @Component({
-  selector: 'instance-detail',
+  selector: '[instance-detail]',
   templateUrl: 'app/instance-detail.component.html',
   styles: [`
-  .instance-detail-li {
-    border: 1px solid #D5D5D5;
-    padding: 5px;
-    margin: 20px 0px;
-  }
-
   .instance-detail-row {
     margin-bottom: 0px;
   }
 
   .instance-detail-text {
     padding: 0px 5px;
+    margin: 0px;
   }
   `]
 })

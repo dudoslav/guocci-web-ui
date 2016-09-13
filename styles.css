@@ -20,6 +20,25 @@ ul {
   margin: 0px;
 }
 
+.collapsible {
+  border: 0px;
+  box-shadow: 0 0px 0px 0;
+}
+
+.collapsible-header {
+  border: 0px;
+}
+
+.collapsible-header i {
+  font-size: 4.2rem;
+  margin-top: 10%;
+  margin-left: 7%;
+}
+
+.collapsible-body {
+  border: 0px;
+}
+
 .modal {
   width: 40%;
   margin-top: 200px;

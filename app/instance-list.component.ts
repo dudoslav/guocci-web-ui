@@ -8,7 +8,13 @@ import { InstanceDeleteModalComponent } from './instance-delete-modal.component'
 
 @Component({
   selector: 'instance-list',
-  templateUrl: 'app/instance-list.component.html'
+  templateUrl: 'app/instance-list.component.html',
+  styles: [`
+  .instance-detail-li {
+    padding: 5px;
+    margin: 20px 0px;
+  }
+  `]
 })
 export class InstanceListComponent implements OnInit {
 

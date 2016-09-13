@@ -1,12 +1,29 @@
-<li class="z-depth-1 instance-detail-li">
+<div class="collapsible-header row instance-detail-row">
+  <div class="col s2"><h2><i class="fa fa-desktop"></i></h2></div>
+  <div class="col s8">
+    <h5>{{instanceData[1].name}}</h5>
+    <p *ngIf="appliance" class="instance-detail-text">{{appliance.name}}</p>
+  </div>
+  <div class="col s2">
+    <button (click)="doDelete()" class="waves-effect waves-light btn btn-block red darken-1">{{ 'DELETE' | translate }}</button>
+  </div>
+</div>
+
+<div class="collapsible-body">
   <div class="row instance-detail-row">
-    <div class="col s2"><h2><i class="fa fa-desktop"></i></h2></div>
-    <div class="col s8">
-      <h5>{{instanceData[1].name}}</h5>
-      <p *ngIf="appliance" class="instance-detail-text">{{appliance.name}}</p>
+    <div class="col s6">
+      <p *ngIf="flavour" class="instance-detail-text"><i class="fa fa-cube"></i> {{ 'FLAVOUR' | translate }}: {{flavour.name}}</p>
     </div>
-    <div class="col s2">
-      <button (click)="doDelete()" class="waves-effect waves-light btn btn-block red darken-1">{{ 'DELETE' | translate }}</button>
+    <div class="col s6 right-align">
+      <p *ngIf="flavour" class="instance-detail-text">{{ 'CPU' | translate }}: {{flavour.cpu}} <i class="fa fa-cogs"></i></p>
     </div>
   </div>
-</li>
+  <div class="row instance-detail-row">
+    <div class="col s6">
+      <p *ngIf="flavour" class="instance-detail-text"><i class="fa fa-qrcode"></i> {{ 'MEMORY' | translate }}: {{flavour.memory}}</p>
+    </div>
+    <div class="col s6 right-align">
+      <p *ngIf="flavour" class="instance-detail-text">{{ 'VCPU' | translate }}: {{flavour.vcpu}} <i class="fa fa-cubes"></i></p>
+    </div>
+  </div>
+</div>

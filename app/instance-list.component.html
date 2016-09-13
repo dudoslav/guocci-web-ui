@@ -8,8 +8,8 @@
         <h5><a class="btn-floating btn-medium waves-effect waves-light indigo"><i class="fa fa-plus"></i></a></h5>
       </div>
     </div>
-    <ul>
-      <instance-detail *ngFor="let instanceData of instancesData" [instanceData]="instanceData" (onInstanceDelete)="onInstanceDeleteRequest($event)"></instance-detail>
+    <ul materialize="collapsible" class="collapsible" data-collapsible="expandable">
+      <li *ngFor="let instanceData of instancesData" instance-detail class="instance-detail-li z-depth-1" [instanceData]="instanceData" (onInstanceDelete)="onInstanceDeleteRequest($event)"></li>
     </ul>
   </div>
 </div>
