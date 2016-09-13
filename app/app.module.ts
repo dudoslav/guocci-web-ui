@@ -9,6 +9,7 @@ import { MaterializeModule } from 'angular2-materialize/dist/materialize-module'
 import { routing } from './app.routing';
 import { AppComponent } from './app.component';
 import { GuocciService } from './shared/guocci.service';
+import { MemoryPipe } from './memory.pipe';
 import { NavbarComponent } from './navbar.component';
 import { InstanceListComponent } from './instance-list.component';
 import { InstanceDetailComponent } from './instance-detail.component';
@@ -28,6 +29,7 @@ import { AppRequestOptions } from './app.request.options';
     MaterializeModule,
     routing ],
   declarations: [ AppComponent,
+    MemoryPipe,
     InstanceListComponent,
     InstanceDetailComponent,
     InstanceDeleteModalComponent,
