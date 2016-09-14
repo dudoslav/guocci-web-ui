@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter } from '@angular/core';
 
 import { Instance } from './shared/instance';
 import { Site } from './shared/site';
@@ -21,6 +21,7 @@ export class InstanceListComponent implements OnInit {
   instancesData: [ Site, Instance ][];
   @ViewChild(InstanceDeleteModalComponent)
   private instanceDeleteModal: InstanceDeleteModalComponent;
+  actions = new EventEmitter<string>();
 
   constructor(private guocciService: GuocciService) {
 
@@ -29,6 +30,7 @@ export class InstanceListComponent implements OnInit {
   ngOnInit() {
     this.guocciService.getAllInstances().subscribe(res => {
       this.getInstanceData(res[1], res[0] as Instance[][]);
+      setTimeout(() => { this.actions.emit('showStaggeredList'); }, 100);
     });
   }
 
