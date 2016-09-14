@@ -14,6 +14,7 @@ import { NavbarComponent } from './navbar.component';
 import { InstanceListComponent } from './instance-list.component';
 import { InstanceDetailComponent } from './instance-detail.component';
 import { InstanceDeleteModalComponent } from './instance-delete-modal.component';
+import { InstanceCreateWizardComponent } from './instance-create-wizard.component';
 import { AppRequestOptions } from './app.request.options';
 
 
@@ -33,6 +34,7 @@ import { AppRequestOptions } from './app.request.options';
     InstanceListComponent,
     InstanceDetailComponent,
     InstanceDeleteModalComponent,
+    InstanceCreateWizardComponent,
     NavbarComponent ],
   providers: [ GuocciService,
     { provide: LocationStrategy, useClass: HashLocationStrategy },

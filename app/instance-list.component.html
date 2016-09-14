@@ -5,7 +5,20 @@
         <h5>{{ 'YOUR-INSTANCES' | translate }}</h5>
       </div>
       <div class="right">
-        <h5><a class="btn-floating btn-medium waves-effect waves-light indigo"><i class="fa fa-plus"></i></a></h5>
+        <h5><a class="btn-floating btn-medium waves-effect waves-light indigo" routerLink="/instances/create"><i class="fa fa-plus"></i></a></h5>
+      </div>
+    </div>
+    <div class="preloader-wrapper big active" style="right: -45%;" *ngIf="!instancesData">
+      <div class="spinner-layer spinner-blue-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div>
+        <div class="gap-patch">
+          <div class="circle"></div>
+        </div>
+        <div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
       </div>
     </div>
     <ul materialize="collapsible" class="collapsible" data-collapsible="expandable">

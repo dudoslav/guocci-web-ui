@@ -1,31 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Instance } from './shared/instance';
+import { Site } from './shared/site';
+import { Appliance } from './shared/appliance';
+import { GuocciService } from './shared/guocci.service';
 
 
 @Component({
   selector: 'instance-create-wizard',
   templateUrl: 'app/instance-create-wizard.component.html',
   styles: [`
-    .wizard-tab {
-      text-align: center;
-      border:1px solid #D5D5D5;
-      padding: 30px 0px;
-      margin: 0px;
-      box-shadow: 0px 3px 1px #888888;
-    }
-
-    .wizard-tab-activated {
-      background-color: #FFFFFF;
-    }
-
-    .wizard-tab-deactivated {
-      background-color: #D5D5D5;
-    }
+  .select-list {
+    cursor: pointer;
+  }
   `]
 })
-export class InstanceCreateWizardComponent {
-  instanceModel: Instance;
+export class InstanceCreateWizardComponent implements OnInit{
+  appliances: Appliance[];
+  selectedAppliance: Appliance;
 
+  constructor(private guocciService: GuocciService) {
+
+  }
+
+  ngOnInit() {
+    this.guocciService.getAppliances().subscribe(res => this.appliances = res as Appliance[]);
+  }
+
+  onApplianceSelect(appliance: Appliance) {
+    this.selectedAppliance = appliance;
+  }
 
 }
