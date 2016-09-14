@@ -5,12 +5,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({name: 'memory'})
 export class MemoryPipe implements PipeTransform {
 
-  private units = ['B', 'KB', 'MB', 'GB', 'TB'];
+  private units = ['MB', 'GB', 'TB'];
 
   transform(value: number): string {
     let unit = 0;
     let newValue = value;
-    while (newValue / 1000 > 1) {
+    while (newValue / 1000 > 1 && unit < 3) {
       newValue /= 1000;
       unit++;
     }

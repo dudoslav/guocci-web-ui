@@ -1,8 +1,11 @@
 <div class="collapsible-header row instance-detail-row">
   <div class="col s2"><h2><i class="fa fa-desktop"></i></h2></div>
   <div class="col s8">
-    <h5>{{instanceData[1].name}}</h5>
-    <p *ngIf="appliance" class="instance-detail-text">{{appliance.name}}</p>
+    <h5>{{ instanceData[1].name }}</h5>
+    <div class="row">
+      <div class="col s6"><p *ngIf="appliance" class="instance-detail-text">{{ appliance.name }}</p></div>
+      <div class="col s6"><p class="instance-detail-text">{{ instanceData[0].name }}</p></div>
+    </div>
   </div>
   <div class="col s2">
     <button (click)="doDelete()" class="waves-effect waves-light btn btn-block red darken-1">{{ 'DELETE' | translate }}</button>
@@ -24,6 +27,11 @@
     </div>
     <div class="col s6 right-align">
       <p *ngIf="flavour" class="instance-detail-text">{{ 'VCPU' | translate }}: {{ flavour.vcpu }} <i class="fa fa-cubes"></i></p>
+    </div>
+  </div>
+  <div class="row instance-detail-row">
+    <div class="col s6">
+      <p class="instance-detail-text"><i class="fa fa-at"></i> {{ 'ENDPOINT' | translate }}: {{ instanceData[0].endpoint }}</p>
     </div>
   </div>
 </div>
