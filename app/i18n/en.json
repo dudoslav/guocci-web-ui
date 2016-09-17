@@ -7,6 +7,8 @@
   "PUBLIC-SSH-KEY" : "Public SSH Key",
   "APPLIANCE" : "Appliance",
   "APPLIANCE-NAME" : "Appliance name",
+  "IP-ADDRESS" : "IP Address",
+  "MAC-ADDRESS" : "MAC Address",
   "FLAVOUR" : "Flavour",
   "CPU" : "Cpu",
   "VCPU" : "Virtual Cpu",

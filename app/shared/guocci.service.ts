@@ -9,6 +9,7 @@ import { Appliance } from './appliance';
 import { Instance } from './instance';
 import { Flavour } from './flavour';
 import { User } from './user';
+import { Interface } from './interface';
 
 @Injectable()
 export class GuocciService {
@@ -55,6 +56,12 @@ export class GuocciService {
   getFlavourOnSiteForAppliance(applianceId: number, siteId: number, flavourId: number) {
     return this.http.get(`/appliances/${applianceId}/sites/${siteId}/flavours/${flavourId}`)
       .map(res => res.json() as Flavour);
+  }
+
+  //TODO: This need unit testing!
+  getInterfacesOnSiteForInstance(instanceId: number, siteId: number) {
+    return this.http.get(`/sites/${siteId}/instances/${instanceId}/interfaces`)
+      .map(res => res.json() as Interface[]);
   }
 
   getInstancesOnSite(siteId: number) {

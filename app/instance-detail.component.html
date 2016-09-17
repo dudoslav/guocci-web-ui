@@ -29,9 +29,9 @@
       <p *ngIf="flavour" class="instance-detail-text">{{ 'VCPU' | translate }}: {{ flavour.vcpu }} <i class="fa fa-cubes"></i></p>
     </div>
   </div>
-  <div class="row instance-detail-row">
+  <div class="row instance-detail-row" *ngFor="let interface of interfaces">
     <div class="col s6">
-      <p class="instance-detail-text"><i class="fa fa-at"></i> {{ 'ENDPOINT' | translate }}: {{ instanceData[0].endpoint }}</p>
+      <p class="instance-detail-text"><i class="fa fa-at"></i> {{ 'IP-ADDRESS' | translate }}: {{ interface.address }}</p>
     </div>
   </div>
 </div>

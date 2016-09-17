@@ -4,6 +4,7 @@ import { Instance } from './shared/instance';
 import { Site } from './shared/site';
 import { Flavour } from './shared/flavour';
 import { Appliance } from './shared/appliance';
+import { Interface } from './shared/interface';
 import { GuocciService } from './shared/guocci.service';
 
 
@@ -27,6 +28,7 @@ export class InstanceDetailComponent implements OnInit {
   instanceData: [ Site, Instance ];
   appliance: Appliance;
   flavour: Flavour;
+  interfaces: Interface[];
   @Output()
   onInstanceDelete = new EventEmitter();
 
@@ -40,6 +42,8 @@ export class InstanceDetailComponent implements OnInit {
       this.guocciService.getFlavourOnSiteForAppliance(this.appliance.id, this.instanceData[0].id, this.instanceData[1].flavourId)
         .subscribe(res => this.flavour = res);
     });
+    this.guocciService.getInterfacesOnSiteForInstance(this.instanceData[1].id, this.instanceData[0].id).
+      subscribe(res => this.interfaces = res as Interface[]);
   }
 
   doDelete() {
