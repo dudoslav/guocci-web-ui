@@ -1,5 +1,4 @@
-/// <reference path="../../typings/globals/jasmine/index.d.ts" />
-/*import { inject, TestBed } from '@angular/core/testing';
+import { inject, TestBed } from '@angular/core/testing';
 import { BaseRequestOptions, Http, Response, ResponseOptions, HttpModule } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 
@@ -293,4 +292,4 @@ describe('GuocciService', () => {
 
   });
 
-});*/
+});

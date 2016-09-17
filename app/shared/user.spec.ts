@@ -5,11 +5,11 @@ describe('User', () => {
     let user: User;
 
     beforeEach(() => {
-        user = {name: "Gabor", id: 32, email: "gabor@bodrog.hu"};
+        user = {name: 'Gabor', id: 32, email: 'gabor@bodrog.hu'};
     });
 
     it('has name', () => {
-        expect(user.name).toEqual("Gabor");
+        expect(user.name).toEqual('Gabor');
     });
 
     it('has id', () => {
@@ -17,6 +17,6 @@ describe('User', () => {
     });
 
     it('has email', () => {
-        expect(user.email).toEqual("gabor@bodrog.hu");
+        expect(user.email).toEqual('gabor@bodrog.hu');
     });
 });
