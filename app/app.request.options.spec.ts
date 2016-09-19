@@ -1,4 +1,3 @@
-/// <reference path="../typings/globals/jasmine/index.d.ts" />
 import { inject, TestBed } from '@angular/core/testing';
 import { RequestOptions, RequestOptionsArgs, RequestMethod } from '@angular/http';
 

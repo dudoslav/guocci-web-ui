@@ -7,4 +7,6 @@ export class Instance {
   applianceId: number;
   flavourId: number;
   userData: string;
+  architecture: string;
+  state: string;
 }

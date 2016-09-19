@@ -1,57 +1,57 @@
 <div class="container z-depth-1">
   <div class="row">
     <div class="col s3 center-align">
-      <div *ngIf="selectedAppliance" class="chip">
-        {{selectedAppliance.name}}
+      <div *ngIf="instanceForm.value.appliance" class="chip">
+        {{instanceForm.value.appliance.name}}
       </div>
     </div>
     <div class="col s3 center-align">
-      <div *ngIf="selectedSite" class="chip">
-        {{selectedSite.name}}
+      <div *ngIf="instanceForm.value.site" class="chip">
+        {{instanceForm.value.site.name}}
       </div>
     </div>
     <div class="col s3 center-align">
-      <div *ngIf="selectedFlavour" class="chip">
-        {{selectedFlavour.name}}
+      <div *ngIf="instanceForm.value.flavour" class="chip">
+        {{instanceForm.value.flavour.name}}
       </div>
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" [formGroup]="instanceForm">
     <div class="col s12">
       <ul class="tabs" materialize="tabs">
         <li class="tab col s3"><a href="#appliance" class="active indigo-text">Appliance</a></li>
-        <li class="tab col s3" [class.disabled]="!selectedAppliance"><a href="#site" class="indigo-text" [class.text-lighten-3]="!selectedAppliance">Sites</a></li>
-        <li class="tab col s3" [class.disabled]="!selectedSite"><a href="#flavour" class="indigo-text" [class.text-lighten-3]="!selectedSite">Flavour</a></li>
+        <li class="tab col s3" [class.disabled]="!instanceForm.value.appliance"><a href="#site" class="indigo-text" [class.text-lighten-3]="!instanceForm.value.appliance">Sites</a></li>
+        <li class="tab col s3" [class.disabled]="!instanceForm.value.site"><a href="#flavour" class="indigo-text" [class.text-lighten-3]="!instanceForm.value.site">Flavour</a></li>
         <li class="tab col s3"><a href="#details" class="indigo-text">Details</a></li>
         <div class="indicator indigo" style="z-index:1"></div>
       </ul>
     </div>
     <div id="appliance" class="col s12">
       <ul class="collection">
-        <li *ngFor="let appliance of appliances" (click)="onApplianceSelect(appliance)" [class.active]="selectedAppliance === appliance" class="collection-item select-list">{{ appliance.name }}</li>
+        <li *ngFor="let appliance of appliances" (click)="instanceForm.controls['appliance'].setValue(appliance);" [class.active]="instanceForm.controls['appliance'].value === appliance" class="collection-item select-list">{{ appliance.name }}</li>
       </ul>
     </div>
     <div id="site" class="col s12">
       <ul class="collection">
-        <li *ngFor="let site of sites" (click)="onSiteSelect(site)" [class.active]="selectedSite === site" class="collection-item select-list">{{ site.name }}</li>
+        <li *ngFor="let site of sites" (click)="instanceForm.controls['site'].setValue(site);" [class.active]="instanceForm.controls['site'].value === site" class="collection-item select-list">{{ site.name }}</li>
       </ul>
     </div>
     <div id="flavour" class="col s12">
       <ul class="collection">
-        <li *ngFor="let flavour of flavours" (click)="onFlavourSelect(flavour)" [class.active]="selectedFlavour === flavour" class="collection-item select-list">{{ flavour.name }}</li>
+        <li *ngFor="let flavour of flavours" (click)="instanceForm.controls['flavour'].setValue(flavour);" [class.active]="instanceForm.controls['flavour'].value === flavour" class="collection-item select-list">{{ flavour.name }}</li>
       </ul>
     </div>
     <div id="details" class="col s10 offset-s1">
       <div class="row">
         <div class="input-field col s12">
-          <input id="name" type="text" class="validate">
+          <input id="name" type="text" class="validate" formControlName="name">
           <label class="active" for="name">{{ 'INSTANCE-NAME' | translate }}</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <textarea id="sshKey" class="materialize-textarea"></textarea>
+          <textarea id="sshKey" class="materialize-textarea" formControlName="key"></textarea>
           <label for="sshKey">{{ 'PUBLIC-SSH-KEY' | translate }}</label>
         </div>
       </div>
@@ -62,7 +62,7 @@
         </div>
       </div>
       <div class="row">
-        <button class="waves-effect waves-light btn btn-block indigo" style="margin-bottom: 20px;">{{ 'SUBMIT' | translate }}</button>
+        <button (click)="doSubmit()" class="waves-effect waves-light btn btn-block indigo" style="margin-bottom: 20px;">{{ 'SUBMIT' | translate }}</button>
       </div>
     </div>
   </div>
