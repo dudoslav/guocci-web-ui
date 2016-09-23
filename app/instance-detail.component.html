@@ -8,7 +8,13 @@
     </div>
   </div>
   <div class="col s2">
-    <button (click)="doDelete()" class="waves-effect waves-light btn btn-block red darken-1">{{ 'DELETE' | translate }}</button>
+    <div class="row">
+      <i materialize="tooltip" class="tooltipped col s6 fa fa-cloud red-text" data-position="left" data-delay="50" [attr.data-tooltip]="instanceData[1].status" style="font-size: 2.0em; margin: 0;" [class.green-text]="instanceData[1].status === 'active'"></i>
+      <i class="col s6 fa fa-refresh" style="font-size: 2.0em; margin: 0;"></i>
+    </div>
+    <div class="row">
+      <button (click)="doDelete()" class="waves-effect waves-light btn btn-block red darken-1">{{ 'DELETE' | translate }}</button>
+    </div>
   </div>
 </div>
 
