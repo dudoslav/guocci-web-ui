@@ -56,7 +56,9 @@ export class InstanceCreateWizardComponent implements OnInit{
   }
 
   setStep(step: number) {
-    this.step = step;
+    if (this.step >= step || step === 3) {
+      this.step = step;
+    }
   }
 
   onApplianceChange(appliance: Appliance) {
