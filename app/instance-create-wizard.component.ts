@@ -8,6 +8,8 @@ import { Flavour } from './shared/flavour';
 import { Credential } from './shared/credential';
 import { GuocciService } from './shared/guocci.service';
 
+declare var jQuery: any;
+
 
 @Component({
   selector: 'instance-create-wizard',
@@ -24,6 +26,8 @@ export class InstanceCreateWizardComponent implements OnInit{
   flavours: Flavour[];
 
   instanceForm: FormGroup;
+
+  step = 0;
 
   constructor(private guocciService: GuocciService, private formBuilder: FormBuilder) {
 
@@ -43,6 +47,16 @@ export class InstanceCreateWizardComponent implements OnInit{
       this.instanceForm.controls['appliance'].valueChanges.subscribe(appliance => this.onApplianceChange(appliance));
       this.instanceForm.controls['site'].valueChanges.subscribe(site => this.onSiteChange(site));
     });
+  }
+
+  nextStep() {
+    this.step++;
+    jQuery(`.tab:nth-child(${this.step + 1})`).removeClass('disabled');
+    jQuery('.tab > a')[this.step].click();
+  }
+
+  setStep(step: number) {
+    this.step = step;
   }
 
   onApplianceChange(appliance: Appliance) {
