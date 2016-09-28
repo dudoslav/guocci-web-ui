@@ -20,7 +20,7 @@ declare var jQuery: any;
   }
   `]
 })
-export class InstanceCreateWizardComponent implements OnInit{
+export class InstanceCreateWizardComponent implements OnInit {
   appliances: Appliance[];
   sites: Site[];
   flavours: Flavour[];
@@ -39,7 +39,8 @@ export class InstanceCreateWizardComponent implements OnInit{
       site: ['', Validators.required],
       flavour: ['', Validators.required],
       name: ['', Validators.required],
-      key: ['', Validators.required]
+      key: ['', Validators.required],
+      userData: ['']
     });
 
     this.guocciService.getAppliances().subscribe(res => {
