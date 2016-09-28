@@ -37,7 +37,6 @@ export class InstanceDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.instanceData[1].state);
     this.guocciService.getAppliance(this.instanceData[1].applianceId).subscribe(res => {
       this.appliance = res;
       this.guocciService.getFlavourOnSiteForAppliance(this.appliance.id, this.instanceData[0].id, this.instanceData[1].flavourId)
