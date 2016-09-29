@@ -12,6 +12,7 @@
   "MAC-ADDRESS" : "MAC Address",
   "FLAVOUR" : "Flavour",
   "FLAVOURS" : "Flavours",
+  "NAME" : "Name",
   "CPU" : "Cpu",
   "VCPU" : "Virtual Cpu",
   "MEMORY" : "Memory",

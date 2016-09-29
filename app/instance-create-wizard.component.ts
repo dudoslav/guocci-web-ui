@@ -56,8 +56,8 @@ export class InstanceCreateWizardComponent implements OnInit {
     jQuery('.tab > a')[this.step].click();
   }
 
-  setStep(step: number) {
-    if (this.step >= step || step === 3) {
+  setStep(step: number, event: any) {
+    if (event.srcElement.className.indexOf('disabled') === -1) {
       this.step = step;
     }
   }
