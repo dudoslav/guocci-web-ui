@@ -11,6 +11,10 @@ import { User } from './shared/user';
       padding: 0px 10px;
       margin-bottom: 50px;
     }
+    .guocci-navbar-text {
+      line-height: 2rem;
+      height: 14px;
+    }
     `]
 })
 export class NavbarComponent implements OnInit {
