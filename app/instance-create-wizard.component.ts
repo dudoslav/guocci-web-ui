@@ -57,7 +57,7 @@ export class InstanceCreateWizardComponent implements OnInit {
   }
 
   setStep(step: number, event: any) {
-    if (event.srcElement.className.indexOf('disabled') === -1) {
+    if (event.target.className.indexOf('disabled') === -1) {
       this.step = step;
     }
   }
