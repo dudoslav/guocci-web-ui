@@ -1,19 +1,15 @@
 <div class="collapsible-header row instance-detail-row">
-  <div class="col s2"><h2><i class="fa fa-desktop"></i></h2></div>
+  <div class="col s2"><h2><i class="fa fa-desktop red-text text-darken-1" [class.green-text]="instanceData[1].state == 'active'"></i></h2></div>
   <div class="col s8">
     <h5>{{ instanceData[1].name }}</h5>
     <div class="row">
-      <div class="col s6"><p *ngIf="appliance" class="instance-detail-text">{{ appliance.name }}</p></div>
-      <div class="col s6"><p class="instance-detail-text">{{ instanceData[0].name }}</p></div>
+      <div class="col s6"><p *ngIf="appliance" class="instance-detail-text">{{ appliance.name }}<br>{{ instanceData[0].name }}</p></div>
+      <div class="col s6" *ngFor="let interface of interfaces"><p class="instance-detail-text">{{ interface.address }}</p></div>
     </div>
   </div>
   <div class="col s2">
     <div class="row">
-      <i materialize="tooltip" class="tooltipped col s6 fa fa-cloud red-text" data-position="left" data-delay="50" [attr.data-tooltip]="instanceData[1].state || 'unknown'" style="font-size: 2.0em; margin: 0;" [class.green-text]="instanceData[1].state == 'active'"></i>
-      <i class="col s6 fa fa-refresh" style="font-size: 2.0em; margin: 0;"></i>
-    </div>
-    <div class="row">
-      <button (click)="doDelete()" class="waves-effect waves-light btn btn-block red darken-1">{{ 'DELETE' | translate }}</button>
+      <i (click)="doDelete()" class="col s6 fa fa-trash right" style="font-size: 2.0em; margin: 0;" ></i>
     </div>
   </div>
 </div>
@@ -33,11 +29,6 @@
     </div>
     <div class="col s6 right-align">
       <p *ngIf="flavour" class="instance-detail-text">{{ 'VCPU' | translate }}: {{ flavour.vcpu }} <i class="fa fa-cubes"></i></p>
-    </div>
-  </div>
-  <div class="row instance-detail-row" *ngFor="let interface of interfaces">
-    <div class="col s6">
-      <p class="instance-detail-text"><i class="fa fa-at"></i> {{ 'IP-ADDRESS' | translate }}: {{ interface.address }}</p>
     </div>
   </div>
 </div>

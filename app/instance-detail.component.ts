@@ -19,6 +19,7 @@ import { GuocciService } from './shared/guocci.service';
   .instance-detail-text {
     padding: 0px 5px;
     margin: 0px;
+    line-height: 1.2rem;
   }
   `]
 })
