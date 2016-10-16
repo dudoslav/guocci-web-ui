@@ -21,6 +21,12 @@ import { GuocciService } from './shared/guocci.service';
     margin: 0px;
     line-height: 1.2rem;
   }
+
+  .instance-detail-icon {
+    margin-left: 0px;
+    margin-top: 0px;
+    font-size: 5rem;
+  }
   `]
 })
 export class InstanceDetailComponent implements OnInit {
