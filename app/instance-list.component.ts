@@ -41,6 +41,15 @@ export class InstanceListComponent implements OnInit {
         result.push([ sites[index], siteInstances[i] ]);
       }
     });
+    let order = ['active', 'suspended', 'inactive'];
+    result.sort((a, b) => {
+      let nameA = a[1].name.toLowerCase();
+      let nameB = b[1].name.toLowerCase();
+      if (nameA > nameB) { return 1; }
+      if (nameA < nameB) { return -1; }
+      return 0;
+    });
+    result.sort((a, b) => order.indexOf(a[1].state) - order.indexOf(b[1].state));
     this.instancesData = result;
   }
 
