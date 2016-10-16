@@ -1,20 +1,20 @@
 <div class="container z-depth-1">
   <div class="row" [formGroup]="instanceForm">
-    <div class="col s12">
+    <div class="col m12 s12">
       <ul class="tabs" materialize="tabs">
-        <li class="tab col s3"><a (click)="setStep(0, $event)" class="active indigo-text">{{ instanceForm.value.appliance ? instanceForm.value.appliance.name : 'APPLIANCES' | translate }}</a></li>
-        <li class="tab col s3" [class.disabled]="!instanceForm.value.appliance">
+        <li class="tab col m3 s3"><a (click)="setStep(0, $event)" class="active indigo-text">{{ instanceForm.value.appliance ? instanceForm.value.appliance.name : 'APPLIANCES' | translate }}</a></li>
+        <li class="tab col m3 s3" [class.disabled]="!instanceForm.value.appliance">
           <a (click)="setStep(1, $event)" class="indigo-text" [class.text-lighten-3]="!instanceForm.value.appliance" [class.disabled]="!instanceForm.value.appliance">{{ instanceForm.value.site ? instanceForm.value.site.name : 'SITES' | translate }}</a>
         </li>
-        <li class="tab col s3" [class.disabled]="!instanceForm.value.site">
+        <li class="tab col m3 s3" [class.disabled]="!instanceForm.value.site">
           <a (click)="setStep(2, $event)" class="indigo-text" [class.text-lighten-3]="!instanceForm.value.site" [class.disabled]="!instanceForm.value.site">{{ instanceForm.value.flavour ? instanceForm.value.flavour.name : 'FLAVOURS' | translate }}</a>
         </li>
-        <li class="tab col s3"><a (click)="setStep(3, $event)" class="indigo-text">{{ 'DETAILS' | translate }}</a></li>
+        <li class="tab col m3 s3"><a (click)="setStep(3, $event)" class="indigo-text">{{ 'DETAILS' | translate }}</a></li>
         <div class="indicator indigo" style="z-index:1"></div>
       </ul>
     </div>
 
-    <div [hidden]="!(step === 0)" class="col s12">
+    <div [hidden]="!(step === 0)" class="col m12 s12">
       <div class="collection">
         <a *ngFor="let appliance of appliances" (click)="instanceForm.controls['appliance'].setValue(appliance); nextStep();"
           [class.active]="instanceForm.controls['appliance'].value === appliance"
@@ -23,7 +23,7 @@
           class="collection-item select-list indigo-text center">{{ appliance.name }}</a>
       </div>
     </div>
-    <div [hidden]="!(step === 1)" class="col s12">
+    <div [hidden]="!(step === 1)" class="col m12 s12">
       <div class="collection">
         <a *ngFor="let site of sites" (click)="instanceForm.controls['site'].setValue(site); nextStep();"
           [class.active]="instanceForm.controls['site'].value === site"
@@ -32,20 +32,20 @@
           class="collection-item select-list indigo-text center">{{ site.name }}</a>
       </div>
     </div>
-    <div [hidden]="!(step === 2)" class="col s12">
+    <div [hidden]="!(step === 2)" class="col m12 s12">
       <div class="collection">
         <a class="collection-item indigo-text">
           <div class="row">
-            <div class="col s3">
+            <div class="col m3 s3">
               <b>{{ 'NAME' | translate }}</b>
             </div>
-            <div class="col s3">
+            <div class="col m3 s3">
               <b>{{ 'CPU' | translate }}</b>
             </div>
-            <div class="col s3">
+            <div class="col m3 s3">
               <b>{{ 'VCPU' | translate }}</b>
             </div>
-            <div class="col s3">
+            <div class="col m3 s3">
               <b>{{ 'MEMORY' | translate }}</b>
             </div>
           </div>
@@ -56,37 +56,37 @@
           [class.white-text]="instanceForm.controls['flavour'].value === flavour"
           class="collection-item select-list indigo-text">
           <div class="row">
-            <div class="col s3">
+            <div class="col m3 s3">
               {{ flavour.name }}
             </div>
-            <div class="col s3">
+            <div class="col m3 s3">
               {{ flavour.cpu }}
             </div>
-            <div class="col s3">
+            <div class="col m3 s3">
               {{ flavour.vcpu }}
             </div>
-            <div class="col s3">
+            <div class="col m3 s3">
               {{ flavour.memory | memory }}
             </div>
           </div>
           </a>
       </div>
     </div>
-    <div [hidden]="!(step === 3)" class="col s10 offset-s1">
+    <div [hidden]="!(step === 3)" class="col m10 s10 offset-s1 offset-m1">
       <div class="row">
-        <div class="input-field col s12">
+        <div class="input-field col m12 s12">
           <input id="name" type="text" class="validate" formControlName="name">
           <label class="active" for="name">{{ 'INSTANCE-NAME' | translate }}</label>
         </div>
       </div>
       <div class="row">
-        <div class="input-field col s12">
+        <div class="input-field col m12 s12">
           <textarea id="sshKey" class="materialize-textarea" formControlName="key"></textarea>
           <label for="sshKey">{{ 'PUBLIC-SSH-KEY' | translate }}</label>
         </div>
       </div>
       <div class="row">
-        <div class="input-field col s12">
+        <div class="input-field col m12 s12">
           <textarea id="userData" class="materialize-textarea" formControlName="userData"></textarea>
           <label for="userData">{{ 'INSTANCE-USER-DATA' | translate }}</label>
         </div>

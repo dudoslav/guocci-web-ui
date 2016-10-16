@@ -3,9 +3,9 @@
     <a class="brand-logo left" routerLink="/sites">GUOCCI</a>
     <ul id="nav-mobile" class="right">
       <li>
-        <div>
-          <span *ngIf="user" class="guocci-navbar-text"><i class="fa fa-user guocci-navbar-text"></i> {{user.name}}<br>
-          <i class="fa fa-envelope guocci-navbar-text"></i> {{user.email}}</span>
+        <div class="guocci-navbar-text">
+          <span *ngIf="user"><i class="fa fa-user guocci-navbar-text"></i> {{user.name}}</span>
+          <span class="hide-on-small-only" *ngIf="user"><br><i class="fa fa-envelope guocci-navbar-text"></i> {{user.email}}</span>
         </div>
       </li>
     </ul>
