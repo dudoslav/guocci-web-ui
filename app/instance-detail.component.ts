@@ -26,6 +26,7 @@ import { GuocciService } from './shared/guocci.service';
     margin-left: 0px;
     margin-top: 0px;
     font-size: 5rem;
+    width: 1em;
   }
   `]
 })

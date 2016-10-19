@@ -1,12 +1,12 @@
 <div class="collapsible-header row instance-detail-row">
-  <div class="col m2 hide-on-small-only" [ngSwitch]="instanceData[1].state">
-    <h2>
-      <i *ngSwitchCase="'active'" class="instance-detail-icon icon-desktop-play green-text text-darken-1"></i>
-      <i *ngSwitchCase="'inactive'" class="instance-detail-icon icon-desktop-stop red-text text-darken-1"></i>
-      <i *ngSwitchCase="'suspended'" class="instance-detail-icon icon-desktop-pause red-text text-darken-1"></i>
-    </h2>
-  </div>
-  <div class="col m8 s10">
+  <div class="col m10 s10">
+    <div class="hide-on-small-only" [ngSwitch]="instanceData[1].state">
+      <h2>
+        <i *ngSwitchCase="'active'" class="instance-detail-icon icon-desktop-play indigo-text text-darken-1"></i>
+        <i *ngSwitchCase="'inactive'" class="instance-detail-icon icon-desktop-stop black-text"></i>
+        <i *ngSwitchCase="'suspended'" class="instance-detail-icon icon-desktop-pause indigo-text text-accent-1"></i>
+      </h2>
+    </div>
     <h5>{{ instanceData[1].name }}</h5>
     <div class="row">
       <div class="col m6 s6"><p *ngIf="appliance" class="instance-detail-text">{{ appliance.name }}<br>{{ instanceData[0].name }}</p></div>
