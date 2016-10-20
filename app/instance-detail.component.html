@@ -11,7 +11,9 @@
     <div>
       <div style="display: inline-block; width: 50%"><p *ngIf="appliance" class="instance-detail-text">{{ appliance.name }}<br>{{ instanceData[0].name }}</p></div>
       <div style="display: inline-block">
-        <p *ngFor="let interface of interfaces" class="instance-detail-text">{{ interface.address }}</p>
+        <span *ngFor="let interface of interfaces" class="instance-detail-text">
+           <span #toCopy>{{ interface.address }}</span> <i materialize="tooltip" [ngIIclipboard]="toCopy" data-position="right" data-delay="50" [attr.data-tooltip]="'COPY' | translate" class="tooltipped fa fa-clone instance-copy-icon right"></i>
+        </span>
       </div>
     </div>
   </div>

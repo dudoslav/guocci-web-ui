@@ -24,5 +24,6 @@
   "SUBMIT" : "Submit",
   "DELETE" : "Delete",
   "CANCEL" : "Cancel",
-  "YOUR-INSTANCES" : "Your Instances"
+  "YOUR-INSTANCES" : "Your Instances",
+  "COPY" : "Copy to Clipboard"
 }

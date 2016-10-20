@@ -28,6 +28,16 @@ import { GuocciService } from './shared/guocci.service';
     font-size: 5rem;
     width: 1em;
   }
+
+  .instance-copy-icon {
+    font-weight: bold;
+    font-size: inherit;
+    margin: 0px;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    line-height: 1.2rem;
+  }
   `]
 })
 export class InstanceDetailComponent implements OnInit {
