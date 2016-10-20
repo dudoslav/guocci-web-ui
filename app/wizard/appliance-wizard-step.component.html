@@ -1,9 +1,0 @@
-<div [hidden]="!visible" class="col s12">
-  <div class="collection">
-    <a *ngFor="let appliance of appliances" (click)="selectAppliance(appliance)"
-      [class.active]="instanceForm.controls['appliance'].value === appliance"
-      [class.indigo]="instanceForm.controls['appliance'].value === appliance"
-      [class.white-text]="instanceForm.controls['appliance'].value === appliance"
-      class="collection-item select-list indigo-text center">{{ appliance.name }}</a>
-  </div>
-</div>
