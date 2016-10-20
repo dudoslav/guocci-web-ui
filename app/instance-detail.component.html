@@ -8,9 +8,9 @@
       </h2>
     </div>
     <h5>{{ instanceData[1].name }}</h5>
-    <div class="row">
-      <div class="col m6 s6"><p *ngIf="appliance" class="instance-detail-text">{{ appliance.name }}<br>{{ instanceData[0].name }}</p></div>
-      <div class="col m6 s6">
+    <div>
+      <div style="display: inline-block; width: 50%"><p *ngIf="appliance" class="instance-detail-text">{{ appliance.name }}<br>{{ instanceData[0].name }}</p></div>
+      <div style="display: inline-block">
         <p *ngFor="let interface of interfaces" class="instance-detail-text">{{ interface.address }}</p>
       </div>
     </div>
