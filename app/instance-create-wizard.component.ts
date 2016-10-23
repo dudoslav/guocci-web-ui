@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { Instance } from './shared/instance';
-import { Site } from './shared/site';
-import { Appliance } from './shared/appliance';
-import { Flavour } from './shared/flavour';
-import { Credential } from './shared/credential';
-import { GuocciService } from './shared/guocci.service';
+import { Instance, Site, Appliance, Flavour, Credential, GuocciService } from './shared/index';
 
 declare var jQuery: any;
 
@@ -18,12 +13,20 @@ declare var jQuery: any;
   .select-list {
     cursor: pointer;
   }
+
+  .disable-list-item:not(.active):hover {
+    opacity: 1.0;
+    box-shadow: none;
+    background-color: #FFFFFF !important;
+    cursor: default;
+  }
   `]
 })
 export class InstanceCreateWizardComponent implements OnInit {
   appliances: Appliance[];
   sites: Site[];
   flavours: Flavour[];
+  credentials: Credential[];
 
   instanceForm: FormGroup;
 
@@ -48,6 +51,8 @@ export class InstanceCreateWizardComponent implements OnInit {
       this.instanceForm.controls['appliance'].valueChanges.subscribe(appliance => this.onApplianceChange(appliance));
       this.instanceForm.controls['site'].valueChanges.subscribe(site => this.onSiteChange(site));
     });
+
+    this.guocciService.getUserCredentials().subscribe(res => this.credentials = res as Credential[]);
   }
 
   nextStep() {

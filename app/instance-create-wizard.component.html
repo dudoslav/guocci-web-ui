@@ -81,8 +81,16 @@
       </div>
       <div class="row">
         <div class="input-field col m12 s12">
-          <textarea id="sshKey" class="materialize-textarea" formControlName="key"></textarea>
+          <textarea #sshKey id="sshKey" class="materialize-textarea" formControlName="key"></textarea>
           <label for="sshKey">{{ 'PUBLIC-SSH-KEY' | translate }}</label>
+        </div>
+        <div *ngIf="credentials && credentials.length > 0" class="collection">
+          <a [class.text-lighten-3]="sshKey.value" [class.disable-list-item]="sshKey.value" *ngFor="let credential of credentials" class="collection-item select-list indigo-text">
+            <div class="row">
+              <div class="col m2 s2"><b>{{ credential.type }}</b></div>
+              <div class="col m10 s10">{{ credential.value }}</div>
+            </div>
+          </a>
         </div>
       </div>
       <div class="row">
