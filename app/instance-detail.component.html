@@ -29,18 +29,18 @@
 <div class="collapsible-body">
   <div class="row instance-detail-row">
     <div class="col m6 s6">
-      <p *ngIf="flavour" class="instance-detail-text"><i class="fa fa-cube"></i> {{ 'FLAVOUR' | translate }}: {{ flavour.name }}</p>
+      <p *ngIf="flavour" class="instance-detail-text"><b>{{ 'FLAVOUR' | translate }}:</b> {{ flavour.name }}</p>
     </div>
-    <div class="col m6 s6 right-align">
-      <p *ngIf="flavour" class="instance-detail-text">{{ 'CPU' | translate }}: {{ flavour.cpu }} <i class="fa fa-cogs"></i></p>
+    <div class="col m6 s6">
+      <p *ngIf="flavour" class="instance-detail-text"><b>{{ 'CPU' | translate }}:</b> {{ flavour.cpu }}</p>
     </div>
   </div>
   <div class="row instance-detail-row">
     <div class="col m6 s6">
-      <p *ngIf="flavour" class="instance-detail-text"><i class="fa fa-qrcode"></i> {{ 'MEMORY' | translate }}: {{ flavour.memory | memory }}</p>
+      <p *ngIf="flavour" class="instance-detail-text"><b>{{ 'MEMORY' | translate }}:</b> {{ flavour.memory | memory }}</p>
     </div>
-    <div class="col m6 s6 right-align">
-      <p *ngIf="flavour" class="instance-detail-text">{{ 'VCPU' | translate }}: {{ flavour.vcpu }} <i class="fa fa-cubes"></i></p>
+    <div class="col m6 s6">
+      <p *ngIf="flavour" class="instance-detail-text"><b>{{ 'VCPU' | translate }}:</b> {{ flavour.vcpu }}</p>
     </div>
   </div>
 </div>
