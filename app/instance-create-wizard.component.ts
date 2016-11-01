@@ -20,6 +20,11 @@ declare var jQuery: any;
     background-color: #FFFFFF !important;
     cursor: default;
   }
+
+  .detail-overview {
+    margin: 0.5em 0;
+    padding: 0.5em 0.5em;
+  }
   `]
 })
 export class InstanceCreateWizardComponent implements OnInit {

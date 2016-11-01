@@ -15,6 +15,7 @@
   "NAME" : "Name",
   "CPU" : "Cpu",
   "VCPU" : "Virtual Cpu",
+  "VO" : "Virtual organization",
   "MEMORY" : "Memory",
   "SITE" : "Site",
   "SITES" : "Sites",

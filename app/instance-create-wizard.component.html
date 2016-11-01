@@ -16,19 +16,15 @@
 
     <div [hidden]="!(step === 0)" class="col m12 s12">
       <div class="collection">
-        <a *ngFor="let appliance of appliances" (click)="instanceForm.controls['appliance'].setValue(appliance); nextStep();"
-          [class.active]="instanceForm.controls['appliance'].value === appliance"
-          [class.indigo]="instanceForm.controls['appliance'].value === appliance"
-          [class.white-text]="instanceForm.controls['appliance'].value === appliance"
+        <a *ngFor="let appliance of appliances" (click)="instanceForm.controls['appliance'].setValue(appliance); nextStep();" [class.active]="instanceForm.controls['appliance'].value === appliance"
+          [class.indigo]="instanceForm.controls['appliance'].value === appliance" [class.white-text]="instanceForm.controls['appliance'].value === appliance"
           class="collection-item select-list indigo-text center">{{ appliance.name }}</a>
       </div>
     </div>
     <div [hidden]="!(step === 1)" class="col m12 s12">
       <div class="collection">
-        <a *ngFor="let site of sites" (click)="instanceForm.controls['site'].setValue(site); nextStep();"
-          [class.active]="instanceForm.controls['site'].value === site"
-          [class.indigo]="instanceForm.controls['site'].value === site"
-          [class.white-text]="instanceForm.controls['site'].value === site"
+        <a *ngFor="let site of sites" (click)="instanceForm.controls['site'].setValue(site); nextStep();" [class.active]="instanceForm.controls['site'].value === site"
+          [class.indigo]="instanceForm.controls['site'].value === site" [class.white-text]="instanceForm.controls['site'].value === site"
           class="collection-item select-list indigo-text center">{{ site.name }}</a>
       </div>
     </div>
@@ -50,10 +46,8 @@
             </div>
           </div>
         </a>
-        <a *ngFor="let flavour of flavours" (click)="instanceForm.controls['flavour'].setValue(flavour); nextStep();"
-          [class.active]="instanceForm.controls['flavour'].value === flavour"
-          [class.indigo]="instanceForm.controls['flavour'].value === flavour"
-          [class.white-text]="instanceForm.controls['flavour'].value === flavour"
+        <a *ngFor="let flavour of flavours" (click)="instanceForm.controls['flavour'].setValue(flavour); nextStep();" [class.active]="instanceForm.controls['flavour'].value === flavour"
+          [class.indigo]="instanceForm.controls['flavour'].value === flavour" [class.white-text]="instanceForm.controls['flavour'].value === flavour"
           class="collection-item select-list indigo-text">
           <div class="row">
             <div class="col m3 s3">
@@ -69,38 +63,78 @@
               {{ flavour.memory | memory }}
             </div>
           </div>
-          </a>
+        </a>
       </div>
     </div>
-    <div [hidden]="!(step === 3)" class="col m10 s10 offset-s1 offset-m1">
-      <div class="row">
-        <div class="input-field col m12 s12">
-          <input id="name" type="text" class="validate" formControlName="name">
-          <label class="active" for="name">{{ 'INSTANCE-NAME' | translate }}</label>
+    <div [hidden]="!(step === 3)" class="col m12 s12 row">
+      <div class="col m8 s12">
+        <div class="row">
+          <div class="input-field col m12 s12">
+            <input id="name" type="text" class="validate" formControlName="name">
+            <label class="active" for="name">{{ 'INSTANCE-NAME' | translate }}</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col m12 s12">
+            <textarea #sshKey id="sshKey" class="materialize-textarea" formControlName="key"></textarea>
+            <label for="sshKey">{{ 'PUBLIC-SSH-KEY' | translate }}</label>
+          </div>
+          <div *ngIf="credentials && credentials.length > 0" class="collection">
+            <a [class.text-lighten-3]="sshKey.value" [class.disable-list-item]="sshKey.value" *ngFor="let credential of credentials"
+              class="collection-item select-list indigo-text">
+              <div class="row">
+                <div class="col m2 s2"><b>{{ credential.type }}</b></div>
+                <div class="col m10 s10 truncate">{{ credential.value }}</div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col m12 s12">
+            <textarea id="userData" class="materialize-textarea" formControlName="userData"></textarea>
+            <label for="userData">{{ 'INSTANCE-USER-DATA' | translate }}</label>
+          </div>
+        </div>
+        <div class="row">
+          <button [disabled]="!instanceForm.valid" (click)="doSubmit()" class="waves-effect waves-light btn btn-block indigo" style="margin-bottom: 20px;">{{ 'SUBMIT' | translate }}</button>
         </div>
       </div>
-      <div class="row">
-        <div class="input-field col m12 s12">
-          <textarea #sshKey id="sshKey" class="materialize-textarea" formControlName="key"></textarea>
-          <label for="sshKey">{{ 'PUBLIC-SSH-KEY' | translate }}</label>
+      <div class="col m4 s12" style="margin-top: 3.4em">
+        <div *ngIf="instanceForm.value.appliance" class="indigo white-text z-depth-1 detail-overview">
+          {{ 'APPLIANCE' | translate }}:
+          <div class="right">{{instanceForm.value.appliance.name}}</div>
+          <div class="divider" style="margin: 0.5em 0"></div>
+          <div class="row detail-overview">
+            {{ 'VO' | translate }}:
+            <div class="right trancute">{{instanceForm.value.appliance.vo}}</div>
+          </div>
         </div>
-        <div *ngIf="credentials && credentials.length > 0" class="collection">
-          <a [class.text-lighten-3]="sshKey.value" [class.disable-list-item]="sshKey.value" *ngFor="let credential of credentials" class="collection-item select-list indigo-text">
-            <div class="row">
-              <div class="col m2 s2"><b>{{ credential.type }}</b></div>
-              <div class="col m10 s10">{{ credential.value }}</div>
-            </div>
-          </a>
+        <div *ngIf="instanceForm.value.site" class="indigo white-text z-depth-1 detail-overview">
+          {{ 'SITE' | translate }}:
+          <div class="right">{{instanceForm.value.site.name}}</div>
+          <div class="divider" style="margin: 0.5em 0"></div>
+          <div class="row detail-overview">
+            {{ 'ENDPOINT' | translate }}:
+            <div class="right trancute">{{instanceForm.value.site.endpoint}}</div>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="input-field col m12 s12">
-          <textarea id="userData" class="materialize-textarea" formControlName="userData"></textarea>
-          <label for="userData">{{ 'INSTANCE-USER-DATA' | translate }}</label>
+        <div *ngIf="instanceForm.value.flavour" class="indigo white-text z-depth-1 detail-overview">
+          {{ 'FLAVOUR' | translate }}:
+          <div class="right">{{instanceForm.value.flavour.name}}</div>
+          <div class="divider" style="margin: 0.5em 0"></div>
+          <div class="row detail-overview">
+            {{ 'CPU' | translate }}:
+            <div class="right">{{instanceForm.value.flavour.cpu}}</div>
+          </div>
+          <div class="row detail-overview">
+            {{ 'VCPU' | translate }}:
+            <div class="right">{{instanceForm.value.flavour.vcpu}}</div>
+          </div>
+          <div class="row detail-overview">
+            {{ 'MEMORY' | translate }}:
+            <div class="right">{{instanceForm.value.flavour.memory | memory}}</div>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <button [disabled]="!instanceForm.valid" (click)="doSubmit()" class="waves-effect waves-light btn btn-block indigo" style="margin-bottom: 20px;">{{ 'SUBMIT' | translate }}</button>
       </div>
     </div>
   </div>
