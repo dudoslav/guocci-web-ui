@@ -76,15 +76,19 @@
         </div>
         <div class="row">
           <div class="input-field col m12 s12">
-            <textarea #sshKey id="sshKey" class="materialize-textarea" formControlName="key"></textarea>
+            <textarea #sshKey id="sshKey" class="materialize-textarea" [value]="key" (input)="setKey($event.target.value)"></textarea>
             <label for="sshKey">{{ 'PUBLIC-SSH-KEY' | translate }}</label>
           </div>
           <div *ngIf="credentials && credentials.length > 0" class="collection">
-            <a [class.text-lighten-3]="sshKey.value" [class.disable-list-item]="sshKey.value" *ngFor="let credential of credentials"
+            <a *ngFor="let credential of credentials" (click)="setCredential(credential)"
+              [class.text-lighten-3]="sshKey.value"
+              [class.disable-list-item]="sshKey.value"
+              [class.indigo]="credential == instanceForm.value.credential"
+              [class.white-text]="credential == instanceForm.value.credential"
               class="collection-item select-list indigo-text">
               <div class="row">
-                <div class="col m2 s2"><b>{{ credential.type }}</b></div>
-                <div class="col m10 s10 truncate">{{ credential.value }}</div>
+                <div class="col m6 s12 truncate">{{ credential.value.split(" ")[2] }}</div>
+                <div class="col m6 s12 truncate">{{ credential.value }}</div>
               </div>
             </a>
           </div>
@@ -104,18 +108,18 @@
           {{ 'APPLIANCE' | translate }}:
           <div class="right">{{instanceForm.value.appliance.name}}</div>
           <div class="divider" style="margin: 0.5em 0"></div>
-          <div class="row detail-overview">
-            {{ 'VO' | translate }}:
-            <div class="right trancute">{{instanceForm.value.appliance.vo}}</div>
+          <div class="row">
+            <div class="col m6 s6">{{ 'VO' | translate }}:</div>
+            <div class="col m6 s6 right-align" style="word-wrap:break-word">{{instanceForm.value.appliance.vo}}</div>
           </div>
         </div>
         <div *ngIf="instanceForm.value.site" class="indigo white-text z-depth-1 detail-overview">
           {{ 'SITE' | translate }}:
           <div class="right">{{instanceForm.value.site.name}}</div>
           <div class="divider" style="margin: 0.5em 0"></div>
-          <div class="row detail-overview">
-            {{ 'ENDPOINT' | translate }}:
-            <div class="right trancute">{{instanceForm.value.site.endpoint}}</div>
+          <div class="row">
+            <div class="col m4 s6">{{ 'ENDPOINT' | translate }}:</div>
+            <div class="col m8 s6 right-align" style="word-wrap:break-word">{{instanceForm.value.site.endpoint}}</div>
           </div>
         </div>
         <div *ngIf="instanceForm.value.flavour" class="indigo white-text z-depth-1 detail-overview">

@@ -52,3 +52,7 @@ ul {
 .tab {
   cursor: pointer;
 }
+
+.divider {
+  height: 1.5px;
+}

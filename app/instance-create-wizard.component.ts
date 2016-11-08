@@ -5,7 +5,6 @@ import { Instance, Site, Appliance, Flavour, Credential, GuocciService } from '.
 
 declare var jQuery: any;
 
-
 @Component({
   selector: 'instance-create-wizard',
   templateUrl: 'app/instance-create-wizard.component.html',
@@ -25,6 +24,10 @@ declare var jQuery: any;
     margin: 0.5em 0;
     padding: 0.5em 0.5em;
   }
+
+  .detail-overview.row {
+    padding: 0;
+  }
   `]
 })
 export class InstanceCreateWizardComponent implements OnInit {
@@ -34,6 +37,7 @@ export class InstanceCreateWizardComponent implements OnInit {
   credentials: Credential[];
 
   instanceForm: FormGroup;
+  key = "";
 
   step = 0;
 
@@ -47,7 +51,7 @@ export class InstanceCreateWizardComponent implements OnInit {
       site: ['', Validators.required],
       flavour: ['', Validators.required],
       name: ['', Validators.required],
-      key: ['', Validators.required],
+      credential: ['', Validators.required],
       userData: ['']
     });
 
@@ -72,6 +76,20 @@ export class InstanceCreateWizardComponent implements OnInit {
     }
   }
 
+  setKey(key: string) {
+    this.key = key;
+    let modelCredential: Credential = new Credential();
+    modelCredential.type = 'sshKey';
+    modelCredential.value = key;
+    this.instanceForm.controls['credential'].setValue(modelCredential);
+  }
+
+  setCredential(credential: Credential) {
+    if (this.key.length == 0) {
+      this.instanceForm.controls['credential'].setValue(credential);
+    }
+  }
+
   onApplianceChange(appliance: Appliance) {
     this.sites = undefined;
     this.instanceForm.controls['site'].reset();
@@ -92,13 +110,8 @@ export class InstanceCreateWizardComponent implements OnInit {
     model.name = this.instanceForm.value.name;
     model.applianceId = this.instanceForm.value.appliance.id;
     model.flavourId = this.instanceForm.value.flavour.id;
-
-    let modelCredentials: Credential[] = [];
-    modelCredentials.push(new Credential());
-    modelCredentials[0].type = 'sshKey';
-    modelCredentials[0].value = this.instanceForm.value.key;
-    model.credentials = modelCredentials;
-
+    model.credentials = [this.instanceForm.value.credential];
+    
     this.guocciService.createInstanceOnSite(this.instanceForm.value.site.id, model)
     .subscribe(res => {
         window.history.back();
