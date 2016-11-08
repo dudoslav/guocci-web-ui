@@ -110,7 +110,7 @@
           <div class="divider" style="margin: 0.5em 0"></div>
           <div class="row">
             <div class="col m6 s6">{{ 'VO' | translate }}:</div>
-            <div class="col m6 s6 right-align" style="word-wrap:break-word">{{instanceForm.value.appliance.vo}}</div>
+            <div class="col m6 s6 right-align" style="word-break:break-word">{{instanceForm.value.appliance.vo}}</div>
           </div>
         </div>
         <div *ngIf="instanceForm.value.site" class="indigo white-text z-depth-1 detail-overview">
@@ -119,7 +119,7 @@
           <div class="divider" style="margin: 0.5em 0"></div>
           <div class="row">
             <div class="col m4 s6">{{ 'ENDPOINT' | translate }}:</div>
-            <div class="col m8 s6 right-align" style="word-wrap:break-word">{{instanceForm.value.site.endpoint}}</div>
+            <div class="col m8 s6 right-align" style="word-break:break-word">{{instanceForm.value.site.endpoint}}</div>
           </div>
         </div>
         <div *ngIf="instanceForm.value.flavour" class="indigo white-text z-depth-1 detail-overview">
