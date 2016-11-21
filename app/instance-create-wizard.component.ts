@@ -62,7 +62,9 @@ export class InstanceCreateWizardComponent implements OnInit {
       this.instanceForm.controls['site'].valueChanges.subscribe(site => this.onSiteChange(site));
     });
 
-    this.guocciService.getUserCredentials().subscribe(res => this.credentials = res as Credential[]);
+    this.guocciService.getUserCredentials().subscribe(res => {
+      this.credentials = res.filter(cred => cred.type == 'sshKey');
+    });
   }
 
   nextStep() {
