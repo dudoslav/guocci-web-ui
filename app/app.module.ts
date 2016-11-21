@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
 import { MaterializeModule } from 'angular2-materialize/dist/materialize-module';
+import { ClipboardModule }  from 'angular2-clipboard';
 
 import { routing } from './app.routing';
 import { AppComponent } from './app.component';
@@ -28,6 +29,7 @@ import { AppRequestOptions } from './app.request.options';
           deps: [Http]
         }),
     MaterializeModule,
+    ClipboardModule,
     routing ],
   declarations: [ AppComponent,
     MemoryPipe,

@@ -4,12 +4,7 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
 
-import { Site } from './site';
-import { Appliance } from './appliance';
-import { Instance } from './instance';
-import { Flavour } from './flavour';
-import { User } from './user';
-import { Interface } from './interface';
+import { Site, Appliance, Instance, Flavour, User, Interface, Credential } from './';
 
 @Injectable()
 export class GuocciService {
@@ -19,8 +14,14 @@ export class GuocciService {
   }
 
   getUser() {
-      return this.http.get(`/user`)
-        .map(res => res.json() as User);
+    return this.http.get(`/user`)
+      .map(res => res.json() as User);
+  }
+
+  // TODO: This needs unit testing!
+  getUserCredentials() {
+   return this.http.get(`/user/credentials`)
+      .map(res => res.json() as Credential[]);
   }
 
   getSites() {
@@ -58,7 +59,7 @@ export class GuocciService {
       .map(res => res.json() as Flavour);
   }
 
-  //TODO: This need unit testing!
+  // TODO: This need unit testing!
   getInterfacesOnSiteForInstance(instanceId: number, siteId: number) {
     return this.http.get(`/sites/${siteId}/instances/${instanceId}/interfaces`)
       .map(res => res.json() as Interface[]);

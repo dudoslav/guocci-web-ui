@@ -22,7 +22,9 @@
       'rxjs':                       'npm:rxjs',
       'ng2-translate':              'npm:ng2-translate',
       'materialize-css':            'npm:materialize-css',
-      'angular2-materialize':       'npm:angular2-materialize'
+      'angular2-materialize':       'npm:angular2-materialize',
+      'clipboard':                  'npm:clipboard/dist/clipboard.js',
+      'angular2-clipboard':         'npm:angular2-clipboard'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -43,6 +45,12 @@
       },
       'angular2-materialize': {
         main: './dist/index.js',
+        defaultExtension: 'js'
+      },
+      'angular2-clipboard' : {
+        main: './index.js'
+      },
+      'clipboard' : {
         defaultExtension: 'js'
       }
     }

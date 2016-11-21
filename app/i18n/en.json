@@ -15,6 +15,7 @@
   "NAME" : "Name",
   "CPU" : "Cpu",
   "VCPU" : "Virtual Cpu",
+  "VO" : "Virtual organization",
   "MEMORY" : "Memory",
   "SITE" : "Site",
   "SITES" : "Sites",
@@ -24,5 +25,6 @@
   "SUBMIT" : "Submit",
   "DELETE" : "Delete",
   "CANCEL" : "Cancel",
-  "YOUR-INSTANCES" : "Your Instances"
+  "YOUR-INSTANCES" : "Your Instances",
+  "COPY" : "Copy to Clipboard"
 }

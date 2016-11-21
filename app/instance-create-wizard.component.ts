@@ -1,15 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { Instance } from './shared/instance';
-import { Site } from './shared/site';
-import { Appliance } from './shared/appliance';
-import { Flavour } from './shared/flavour';
-import { Credential } from './shared/credential';
-import { GuocciService } from './shared/guocci.service';
+import { Instance, Site, Appliance, Flavour, Credential, GuocciService } from './shared/index';
 
 declare var jQuery: any;
-
+declare var Materialize: any;
 
 @Component({
   selector: 'instance-create-wizard',
@@ -18,14 +13,32 @@ declare var jQuery: any;
   .select-list {
     cursor: pointer;
   }
+
+  .disable-list-item:not(.active):hover {
+    opacity: 1.0;
+    box-shadow: none;
+    background-color: #FFFFFF !important;
+    cursor: default;
+  }
+
+  .detail-overview {
+    margin: 0.5em 0;
+    padding: 0.5em 0.5em;
+  }
+
+  .detail-overview.row {
+    padding: 0;
+  }
   `]
 })
 export class InstanceCreateWizardComponent implements OnInit {
   appliances: Appliance[];
   sites: Site[];
   flavours: Flavour[];
+  credentials: Credential[];
 
   instanceForm: FormGroup;
+  key = "";
 
   step = 0;
 
@@ -39,7 +52,7 @@ export class InstanceCreateWizardComponent implements OnInit {
       site: ['', Validators.required],
       flavour: ['', Validators.required],
       name: ['', Validators.required],
-      key: ['', Validators.required],
+      credential: ['', Validators.required],
       userData: ['']
     });
 
@@ -47,6 +60,10 @@ export class InstanceCreateWizardComponent implements OnInit {
       this.appliances = res as Appliance[];
       this.instanceForm.controls['appliance'].valueChanges.subscribe(appliance => this.onApplianceChange(appliance));
       this.instanceForm.controls['site'].valueChanges.subscribe(site => this.onSiteChange(site));
+    });
+
+    this.guocciService.getUserCredentials().subscribe(res => {
+      this.credentials = res.filter(cred => cred.type == 'sshKey');
     });
   }
 
@@ -59,6 +76,20 @@ export class InstanceCreateWizardComponent implements OnInit {
   setStep(step: number, event: any) {
     if (event.target.className.indexOf('disabled') === -1) {
       this.step = step;
+    }
+  }
+
+  setKey(key: string) {
+    this.key = key;
+    let modelCredential: Credential = new Credential();
+    modelCredential.type = 'sshKey';
+    modelCredential.value = key;
+    this.instanceForm.controls['credential'].setValue(modelCredential);
+  }
+
+  setCredential(credential: Credential) {
+    if (this.key.length == 0) {
+      this.instanceForm.controls['credential'].setValue(credential);
     }
   }
 
@@ -82,19 +113,15 @@ export class InstanceCreateWizardComponent implements OnInit {
     model.name = this.instanceForm.value.name;
     model.applianceId = this.instanceForm.value.appliance.id;
     model.flavourId = this.instanceForm.value.flavour.id;
-
-    let modelCredentials: Credential[] = [];
-    modelCredentials.push(new Credential());
-    modelCredentials[0].type = 'sshKey';
-    modelCredentials[0].value = this.instanceForm.value.key;
-    model.credentials = modelCredentials;
-
+    model.credentials = [this.instanceForm.value.credential];
+    
     this.guocciService.createInstanceOnSite(this.instanceForm.value.site.id, model)
     .subscribe(res => {
         window.history.back();
+        Materialize.toast('Created instance', 4000);
       },
       err => {
-        alert(`Failed to create instance! ${err}`);
+        Materialize.toast(`Failed to create instance! ${err}`, 4000);
       });
   }
 
