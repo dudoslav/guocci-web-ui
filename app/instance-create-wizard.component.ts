@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { Instance, Site, Appliance, Flavour, Credential, GuocciService } from './shared/index';
+import { Instance, Site, Appliance, Credential, GuocciService } from './shared/index';
 
 declare var jQuery: any;
 declare var Materialize: any;
@@ -10,10 +10,6 @@ declare var Materialize: any;
   selector: 'instance-create-wizard',
   templateUrl: 'app/instance-create-wizard.component.html',
   styles: [`
-  .select-list {
-    cursor: pointer;
-  }
-
   .disable-list-item:not(.active):hover {
     opacity: 1.0;
     box-shadow: none;
@@ -32,38 +28,31 @@ declare var Materialize: any;
   `]
 })
 export class InstanceCreateWizardComponent implements OnInit {
-  appliances: Appliance[];
-  sites: Site[];
-  flavours: Flavour[];
   credentials: Credential[];
-
   instanceForm: FormGroup;
-  key = "";
-
+  key = '';
   step = 0;
 
-  constructor(private guocciService: GuocciService, private formBuilder: FormBuilder) {
-
-  }
+  constructor(private guocciService: GuocciService, private formBuilder: FormBuilder) {}
 
   ngOnInit() {
     this.instanceForm = this.formBuilder.group({
-      appliance: ['', Validators.required],
-      site: ['', Validators.required],
-      flavour: ['', Validators.required],
-      name: ['', Validators.required],
-      credential: ['', Validators.required],
-      userData: ['']
+      appliance: [null, Validators.required],
+      site: [null, Validators.required],
+      flavour: [null, Validators.required],
+      name: [null, Validators.required],
+      credential: [null, Validators.required],
+      userData: [null]
     });
 
-    this.guocciService.getAppliances().subscribe(res => {
-      this.appliances = res as Appliance[];
-      this.instanceForm.controls['appliance'].valueChanges.subscribe(appliance => this.onApplianceChange(appliance));
-      this.instanceForm.controls['site'].valueChanges.subscribe(site => this.onSiteChange(site));
-    });
+    this.instanceForm.controls['appliance'].valueChanges
+      .subscribe(() => this.instanceForm.controls['site'].reset());
+    this.instanceForm.controls['site'].valueChanges
+      .subscribe(() => this.instanceForm.controls['flavour'].reset());
 
+    // keep just sshKey
     this.guocciService.getUserCredentials().subscribe(res => {
-      this.credentials = res.filter(cred => cred.type == 'sshKey');
+      this.credentials = res.filter(cred => cred.type === 'sshKey');
     });
   }
 
@@ -88,24 +77,17 @@ export class InstanceCreateWizardComponent implements OnInit {
   }
 
   setCredential(credential: Credential) {
-    if (this.key.length == 0) {
+    if (this.key.length === 0) {
       this.instanceForm.controls['credential'].setValue(credential);
     }
   }
 
   onApplianceChange(appliance: Appliance) {
-    this.sites = undefined;
     this.instanceForm.controls['site'].reset();
-    this.guocciService.getSitesForAppliance(appliance.id).subscribe(res => this.sites = res as Site[]);
   }
 
   onSiteChange(site: Site) {
-    this.flavours = undefined;
     this.instanceForm.controls['flavour'].reset();
-    if (this.instanceForm.value.site) {
-      this.guocciService.getFlavoursOnSiteForAppliance(this.instanceForm.controls['appliance'].value.id, site.id)
-        .subscribe(res => this.flavours = res as Flavour[]);
-    }
   }
 
   doSubmit() {
@@ -114,7 +96,8 @@ export class InstanceCreateWizardComponent implements OnInit {
     model.applianceId = this.instanceForm.value.appliance.id;
     model.flavourId = this.instanceForm.value.flavour.id;
     model.credentials = [this.instanceForm.value.credential];
-    
+    model.userData = this.instanceForm.value.userData;
+
     this.guocciService.createInstanceOnSite(this.instanceForm.value.site.id, model)
     .subscribe(res => {
         window.history.back();

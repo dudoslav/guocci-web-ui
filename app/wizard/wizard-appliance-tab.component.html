@@ -1,0 +1,9 @@
+<div [hidden]="hidden" class="col m12 s12">
+  <div class="collection">
+    <a *ngFor="let appliance of appliances" (click)="select(appliance)"
+      [class.active]="selected === appliance"
+      [class.indigo]="selected === appliance"
+      [class.white-text]="selected === appliance"
+      class="collection-item select-list indigo-text center">{{ appliance.name }}</a>
+  </div>
+</div>

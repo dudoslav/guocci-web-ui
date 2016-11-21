@@ -1,0 +1,32 @@
+<div [hidden]="hidden" class="col m12 s12">
+  <div class="collection">
+    <a class="collection-item indigo-text">
+      <div class="row">
+        <div class="col m3 s3">
+          <b>{{ 'NAME' | translate }}</b>
+        </div>
+        <div class="col m3 s3">
+          <b>{{ 'CPU' | translate }}</b>
+        </div>
+        <div class="col m3 s3">
+          <b>{{ 'VCPU' | translate }}</b>
+        </div>
+        <div class="col m3 s3">
+          <b>{{ 'MEMORY' | translate }}</b>
+        </div>
+      </div>
+    </a>
+    <a *ngFor="let flavour of flavours" (click)="select(flavour)"
+      [class.active]="selected == flavour"
+      [class.indigo]="selected == flavour"
+      [class.white-text]="selected == flavour"
+      class="collection-item select-list indigo-text">
+      <div class="row">
+        <div class="col m3 s3">{{ flavour.name }}</div>
+        <div class="col m3 s3">{{ flavour.cpu }}</div>
+        <div class="col m3 s3">{{ flavour.vcpu }}</div>
+        <div class="col m3 s3">{{ flavour.memory | memory }}</div>
+      </div>
+    </a>
+  </div>
+</div>

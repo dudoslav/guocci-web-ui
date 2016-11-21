@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
 import { MaterializeModule } from 'angular2-materialize/dist/materialize-module';
-import { ClipboardModule }  from 'angular2-clipboard';
+import { ClipboardModule } from 'angular2-clipboard';
 
 import { routing } from './app.routing';
 import { AppComponent } from './app.component';
@@ -15,6 +15,9 @@ import { NavbarComponent } from './navbar.component';
 import { InstanceListComponent } from './instance-list.component';
 import { InstanceDetailComponent } from './instance-detail.component';
 import { InstanceDeleteModalComponent } from './instance-delete-modal.component';
+import { WizardApplianceTab } from './wizard/wizard-appliance-tab.component';
+import { WizardSiteTab } from './wizard/wizard-site-tab.component';
+import { WizardFlavourTab } from './wizard/wizard-flavour-tab.component';
 import { InstanceCreateWizardComponent } from './instance-create-wizard.component';
 import { AppRequestOptions } from './app.request.options';
 
@@ -36,6 +39,9 @@ import { AppRequestOptions } from './app.request.options';
     InstanceListComponent,
     InstanceDetailComponent,
     InstanceDeleteModalComponent,
+    WizardApplianceTab,
+    WizardSiteTab,
+    WizardFlavourTab,
     InstanceCreateWizardComponent,
     NavbarComponent ],
   providers: [ GuocciService,
@@ -43,6 +49,4 @@ import { AppRequestOptions } from './app.request.options';
     { provide: RequestOptions, useClass: AppRequestOptions } ],
   bootstrap: [ AppComponent ]
 })
-export class AppModule {
-
-}
+export class AppModule {}

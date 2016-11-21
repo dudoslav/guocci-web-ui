@@ -68,7 +68,7 @@ export class InstanceDetailComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.dontCollapseElements.forEach( e => jQuery(e.nativeElement).on('click.collapse', (e:any) => e.stopPropagation()));
+    this.dontCollapseElements.forEach(e => jQuery(e.nativeElement).on('click.collapse', (e:any) => e.stopPropagation()));
   }
 
   doDelete() {

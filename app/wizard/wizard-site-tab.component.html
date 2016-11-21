@@ -1,0 +1,9 @@
+<div [hidden]="hidden" class="col m12 s12">
+  <div class="collection">
+    <a *ngFor="let site of sites" (click)="select(site)"
+      [class.active]="selected === site"
+      [class.indigo]="selected === site"
+      [class.white-text]="selected === site"
+      class="collection-item select-list indigo-text center">{{ site.name }}</a>
+  </div>
+</div>

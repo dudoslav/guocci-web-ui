@@ -56,3 +56,7 @@ ul {
 .divider {
   height: 1.5px;
 }
+
+.select-list {
+  cursor: pointer;
+}

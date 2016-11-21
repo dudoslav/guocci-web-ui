@@ -4,10 +4,7 @@
   "description": "Guocci web user interface using angular 2",
   "scripts": {
     "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
-    "docker-build": "docker build -t ng2-quickstart .",
-    "docker": "npm run docker-build && docker run -it --rm -p 3000:3000 -p 3001:3001 guocci-web-ui",
     "pree2e": "npm run webdriver:update",
-    "e2e": "tsc && concurrently \"http-server -s\" \"protractor protractor.config.js\" --kill-others --success first",
     "lint": "tslint ./app/**/*.ts -t verbose",
     "lite": "lite-server",
     "postinstall": "typings install",
@@ -57,7 +54,6 @@
     "karma-cli": "^0.1.2",
     "karma-htmlfile-reporter": "^0.2.2",
     "karma-jasmine": "^0.3.8",
-    "protractor": "^3.3.0",
     "rimraf": "^2.5.2"
   },
   "repository": {}
