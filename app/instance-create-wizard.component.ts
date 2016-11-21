@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Instance, Site, Appliance, Flavour, Credential, GuocciService } from './shared/index';
 
 declare var jQuery: any;
+declare var Materialize: any;
 
 @Component({
   selector: 'instance-create-wizard',
@@ -115,9 +116,10 @@ export class InstanceCreateWizardComponent implements OnInit {
     this.guocciService.createInstanceOnSite(this.instanceForm.value.site.id, model)
     .subscribe(res => {
         window.history.back();
+        Materialize.toast('Created instance', 4000);
       },
       err => {
-        alert(`Failed to create instance! ${err}`);
+        Materialize.toast(`Failed to create instance! ${err}`, 4000);
       });
   }
 
