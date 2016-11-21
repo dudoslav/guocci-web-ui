@@ -14,58 +14,22 @@
       </ul>
     </div>
 
-    <div [hidden]="!(step === 0)" class="col m12 s12">
-      <div class="collection">
-        <a *ngFor="let appliance of appliances" (click)="instanceForm.controls['appliance'].setValue(appliance); nextStep();" [class.active]="instanceForm.controls['appliance'].value === appliance"
-          [class.indigo]="instanceForm.controls['appliance'].value === appliance" [class.white-text]="instanceForm.controls['appliance'].value === appliance"
-          class="collection-item select-list indigo-text center">{{ appliance.name }}</a>
-      </div>
-    </div>
-    <div [hidden]="!(step === 1)" class="col m12 s12">
-      <div class="collection">
-        <a *ngFor="let site of sites" (click)="instanceForm.controls['site'].setValue(site); nextStep();" [class.active]="instanceForm.controls['site'].value === site"
-          [class.indigo]="instanceForm.controls['site'].value === site" [class.white-text]="instanceForm.controls['site'].value === site"
-          class="collection-item select-list indigo-text center">{{ site.name }}</a>
-      </div>
-    </div>
-    <div [hidden]="!(step === 2)" class="col m12 s12">
-      <div class="collection">
-        <a class="collection-item indigo-text">
-          <div class="row">
-            <div class="col m3 s3">
-              <b>{{ 'NAME' | translate }}</b>
-            </div>
-            <div class="col m3 s3">
-              <b>{{ 'CPU' | translate }}</b>
-            </div>
-            <div class="col m3 s3">
-              <b>{{ 'VCPU' | translate }}</b>
-            </div>
-            <div class="col m3 s3">
-              <b>{{ 'MEMORY' | translate }}</b>
-            </div>
-          </div>
-        </a>
-        <a *ngFor="let flavour of flavours" (click)="instanceForm.controls['flavour'].setValue(flavour); nextStep();" [class.active]="instanceForm.controls['flavour'].value === flavour"
-          [class.indigo]="instanceForm.controls['flavour'].value === flavour" [class.white-text]="instanceForm.controls['flavour'].value === flavour"
-          class="collection-item select-list indigo-text">
-          <div class="row">
-            <div class="col m3 s3">
-              {{ flavour.name }}
-            </div>
-            <div class="col m3 s3">
-              {{ flavour.cpu }}
-            </div>
-            <div class="col m3 s3">
-              {{ flavour.vcpu }}
-            </div>
-            <div class="col m3 s3">
-              {{ flavour.memory | memory }}
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
+    <wizard-appliance-tab
+      [hidden]="!(step === 0)"
+      (onSelect)="instanceForm.controls['appliance'].setValue($event); nextStep();">
+    </wizard-appliance-tab>
+    <wizard-site-tab
+      [appliance]="instanceForm.value.appliance"
+      [hidden]="!(step === 1)"
+      (onSelect)="instanceForm.controls['site'].setValue($event); nextStep();">
+    </wizard-site-tab>
+    <wizard-flavour-tab
+      [site]="instanceForm.value.site"
+      [appliance]="instanceForm.value.appliance"
+      [hidden]="!(step === 2)"
+      (onSelect)="instanceForm.controls['flavour'].setValue($event); nextStep();">
+    </wizard-flavour-tab>
+
     <div [hidden]="!(step === 3)" class="col m12 s12 row">
       <div class="col m8 s12">
         <div class="row">
