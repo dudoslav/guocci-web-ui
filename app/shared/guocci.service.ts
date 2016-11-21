@@ -18,7 +18,7 @@ export class GuocciService {
       .map(res => res.json() as User);
   }
 
-  //TODO: This needs unit testing!
+  // TODO: This needs unit testing!
   getUserCredentials() {
    return this.http.get(`/user/credentials`)
       .map(res => res.json() as Credential[]);
@@ -59,7 +59,7 @@ export class GuocciService {
       .map(res => res.json() as Flavour);
   }
 
-  //TODO: This need unit testing!
+  // TODO: This need unit testing!
   getInterfacesOnSiteForInstance(instanceId: number, siteId: number) {
     return this.http.get(`/sites/${siteId}/instances/${instanceId}/interfaces`)
       .map(res => res.json() as Interface[]);
