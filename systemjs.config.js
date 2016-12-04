@@ -48,7 +48,8 @@
         defaultExtension: 'js'
       },
       'angular2-clipboard' : {
-        main: './index.js'
+        main: 'index.js',
+        defaultExtension: 'js'
       },
       'clipboard' : {
         defaultExtension: 'js'
